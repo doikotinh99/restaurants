@@ -124,12 +124,6 @@ class RechargeController extends Controller
             ]);
             date_default_timezone_set('Asia/Ho_Chi_Minh');
             $date = date('Y-m-d H:i:s');
-            $transaction = new Transaction([
-                "time" => $date,
-                "quanlity" => floor($request->amount/1000) ,
-                "from" => 1,
-                "to" => $request->user()->id,
-            ]);
             $result = $recharge->transaction()->save($transaction);
             return response()->json(["transaction" => $result], 200);
        }

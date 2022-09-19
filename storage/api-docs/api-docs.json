@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Full API DTCL",
+        "title": "Full API Restaurant",
         "version": "1.0.0"
     },
     "paths": {
@@ -314,7 +314,7 @@
                 ]
             }
         },
-        "/api/blog/cmt/{id}": {
+        "/api/blog/cmt": {
             "post": {
                 "tags": [
                     "Blog"

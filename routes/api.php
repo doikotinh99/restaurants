@@ -50,7 +50,7 @@ Route::apiResource("blog", BlogController::class, ["only" => [
     "store", "destroy", "update"
 ]])->middleware("auth:sanctum");
 
-Route::post("/blog/cmt/{id}", [BlogController::class, "cmt"])->middleware("auth:sanctum");
+Route::post("/blog/cmt", [BlogController::class, "cmt"])->middleware("auth:sanctum");
 Route::post("blog/images", [BlogController::class, "pushImages"]);
 
 Route::middleware(['auth:sanctum'])->group(function () {

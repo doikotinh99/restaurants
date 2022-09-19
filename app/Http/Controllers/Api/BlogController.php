@@ -205,7 +205,7 @@ class BlogController extends Controller
     }
     /**
      * @OA\Post(
-     *     path="/api/blog/cmt/{id}",
+     *     path="/api/blog/cmt",
      *     tags={"Blog"},
      *     summary="add Blog",
      *     operationId="cmtBlog",

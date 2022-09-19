@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Hash;
 /**
  * @OA\Info(
  *      version="1.0.0",
- *      title="Full API DTCL"
+ *      title="Full API Restaurant"
  * )
  *
  * @OA\Tag(
