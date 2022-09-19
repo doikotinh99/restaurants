@@ -17,6 +17,7 @@ class CreateBlogsTable extends Migration
             $table->id();
             $table->unsignedBigInteger("user_id");
             $table->longText("content")->nullable();
+            $table->integer("status");
             $table->timestamps();
             $table->foreign("user_id")
                 ->references('id')
