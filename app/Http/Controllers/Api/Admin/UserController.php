@@ -92,7 +92,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
-        if(Auth::user()->is_admin == 1) {
+        if(Auth::user()->role == 1) {
             $result = User::where("id", $id)->delete();
             if($result) return response()->json(["msg" => "deleted", "id" => $id], 204);
             else return response()->json(["msg" => "false", "id" => "User does not exist"], 200);
@@ -155,7 +155,7 @@ class UserController extends Controller
      */
     public function active($id)
     {
-        if(Auth::user()->is_admin !== 1) response()->json(["msg" => "false"], 403);
+        if(Auth::user()->role !== 1) response()->json(["msg" => "false"], 403);
         $status = User::where("id", $id)->update(["status" => 1]);
         if($status) return response()->json(["msg" => "true", "user" => "unband"], 200);
         return response()->json(["msg" => "false", "user" => $id], 201);
