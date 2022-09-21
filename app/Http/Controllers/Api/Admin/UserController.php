@@ -94,7 +94,7 @@ class UserController extends Controller
         //
         if(Auth::user()->role == 1) {
             $result = User::where("id", $id)->delete();
-            if($result) return response()->json(["msg" => "deleted", "id" => $id], 204);
+            if($result) return response()->json(["msg" => "deleted", "id" => $id], 200);
             else return response()->json(["msg" => "false", "id" => "User does not exist"], 200);
         }
         return response()->json(["msg" => "login"], 403);
