@@ -36,6 +36,25 @@
                 ]
             }
         },
+        "/api/admin/restaurant": {
+            "get": {
+                "tags": [
+                    "Restaurant"
+                ],
+                "summary": "All Restaurant",
+                "operationId": "Restaurant",
+                "responses": {
+                    "201": {
+                        "description": "Successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
         "/api/admin/user": {
             "get": {
                 "tags": [
@@ -252,7 +271,7 @@
                 "tags": [
                     "Blog"
                 ],
-                "summary": "add Blog",
+                "summary": "edit Blog",
                 "operationId": "updateBlog",
                 "parameters": [
                     {
@@ -319,7 +338,7 @@
                 "tags": [
                     "Blog"
                 ],
-                "summary": "add Blog",
+                "summary": "comment Blog",
                 "operationId": "cmtBlog",
                 "requestBody": {
                     "content": {
@@ -327,6 +346,42 @@
                             "schema": {
                                 "properties": {
                                     "blog_id": {
+                                        "type": "integer"
+                                    },
+                                    "content": {
+                                        "type": "text"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success with some route data"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/blog/repcmt": {
+            "post": {
+                "tags": [
+                    "Blog"
+                ],
+                "summary": "Ceply Comment Blog",
+                "operationId": "repCmtBlog",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "cmt_id": {
                                         "type": "integer"
                                     },
                                     "content": {
@@ -393,6 +448,25 @@
                 "responses": {
                     "200": {
                         "description": "Success with some route data"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/restaurant": {
+            "get": {
+                "tags": [
+                    "Restaurant"
+                ],
+                "summary": "All Restaurant of User",
+                "operationId": "RestaurantOfUser",
+                "responses": {
+                    "201": {
+                        "description": "Successful operation"
                     }
                 },
                 "security": [

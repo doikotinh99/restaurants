@@ -13,5 +13,10 @@ class TableInfo extends Model
         "chair",
         "count",
         "status",
+        "description"
     ];
+
+    public function images(){
+        return $this->morphMany(Image::class, "imageble");
+    }
 }

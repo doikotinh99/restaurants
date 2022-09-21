@@ -4,37 +4,30 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRestaurantInfosTable extends Migration
+class CreateRestaurantsTable extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    // user_id bigint
-    // name varchar
-    // address bigint
-    // time_start time
-    // time_end time
-    // tables bigint
     public function up()
     {
-        Schema::create('restaurant_infos', function (Blueprint $table) {
+        Schema::create('restaurants', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("user_id");
             $table->string("name");
             $table->unsignedBigInteger("address");
             $table->time("time_start")->nullable();
             $table->time("time_end")->nullable();
-            $table->unsignedBigInteger("tables");
             $table->timestamps();
             $table->foreign("user_id")
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
-            $table->foreign("tables")
+            $table->foreign("address")
                 ->references('id')
-                ->on('table_infos')
+                ->on('addresses')
                 ->onDelete('cascade');
         });
     }
@@ -46,6 +39,6 @@ class CreateRestaurantInfosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('restaurant_infos');
+        Schema::dropIfExists('restaurants');
     }
 }

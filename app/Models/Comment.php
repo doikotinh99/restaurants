@@ -18,6 +18,10 @@ class Comment extends Model
         return $this->morphTo();
     }
 
+    public function repComment(){
+        return $this->morphMany(Comment::class, "commentable");
+    }
+
     public function childComment(){
         return $this->hasMany(Comment::class, "parent_id", "id");
     }

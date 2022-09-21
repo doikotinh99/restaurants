@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
  *     description="full api"
  * )
 */
+
 class BlogController extends Controller
 {
     /**
@@ -34,14 +35,14 @@ class BlogController extends Controller
     {
         //
         $result = Blog::all();
-        foreach($result as $val){
+        foreach ($result as $val) {
             $val->comments;
-            foreach($val->comments as $cmt){
-                $cmt->childComment;
-                
+            foreach ($val->comments as $cmt) {
+                $cmt->repComment;
             }
+            $val->user;
         }
-        
+
         return $result;
     }
 
@@ -94,7 +95,7 @@ class BlogController extends Controller
                 // $filename = $images->name;
                 $filename = explode("/", $images)[2];
                 $image = new Image([
-                    "path" => "blogs/".$filename
+                    "path" => "blogs/" . $filename
                 ]);
                 $result->images()->save($image);
             }
@@ -134,7 +135,7 @@ class BlogController extends Controller
      * @OA\Put(
      *     path="/api/blog/{id}",
      *     tags={"Blog"},
-     *     summary="add Blog",
+     *     summary="edit Blog",
      *     operationId="updateBlog",
      *     @OA\Parameter(
      *         name="id",
@@ -164,7 +165,7 @@ class BlogController extends Controller
     public function update(Request $request, Blog $blog)
     {
         //
-        if($request->user()->id != $blog->user_id)
+        if ($request->user()->id != $blog->user_id)
             return response()->json(["msg" => "false user"], 404);
         $result = $blog->update([
             "content" => $request->content
@@ -197,7 +198,7 @@ class BlogController extends Controller
     public function destroy(Blog $blog)
     {
         //
-        if(Auth::user()->id != $blog->user_id)
+        if (Auth::user()->id != $blog->user_id)
             return response()->json(["msg" => "false"], 404);
         $blog->delete();
         $blog->comments()->delete();
@@ -207,7 +208,7 @@ class BlogController extends Controller
      * @OA\Post(
      *     path="/api/blog/cmt",
      *     tags={"Blog"},
-     *     summary="add Blog",
+     *     summary="comment Blog",
      *     operationId="cmtBlog",
      *     @OA\RequestBody(
      *       @OA\MediaType(
@@ -233,13 +234,54 @@ class BlogController extends Controller
      *     security={{"bearer":{}}},
      * )
      */
-    public function cmt(Request $request){
+    public function cmt(Request $request)
+    {
         $blog = Blog::find($request->blog_id);
         $cmt = new Comment([
             "user_id" => $request->user()->id,
             "content" => $request->content,
         ]);
         $result = $blog->comments()->save($cmt);
+        return response()->json(["cmt" => $result], 200);
+    }
+    /**
+     * @OA\Post(
+     *     path="/api/blog/repcmt",
+     *     tags={"Blog"},
+     *     summary="Ceply Comment Blog",
+     *     operationId="repCmtBlog",
+     *     @OA\RequestBody(
+     *       @OA\MediaType(
+     *           mediaType="multipart/form-data",
+     *           @OA\Schema(
+     *               type="object",
+     *               @OA\Property(
+     *                  property="cmt_id",
+     *                  type="integer"
+     *               ),
+     *               @OA\Property(
+     *                  property="content",
+     *                  type="text"
+     *               ),
+     *               
+     *           )
+     *       )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success with some route data"
+     *     ),
+     *     security={{"bearer":{}}},
+     * )
+     */
+    public function replyComment(Request $request)
+    {
+        $cmt = Comment::find($request->cmt_id);
+        $repCmt = new Comment([
+            "user_id" => $request->user()->id,
+            "content" => $request->content,
+        ]);
+        $result = $cmt->repComment()->save($repCmt);
         return response()->json(["cmt" => $result], 200);
     }
 }

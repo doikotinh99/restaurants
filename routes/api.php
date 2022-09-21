@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\Api\Admin\BlogController as AdminBlogController;
+use App\Http\Controllers\Api\Admin\RestaurantController as AdminRestaurantController;
 use App\Http\Controllers\Api\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Api\BlogController;
 use App\Http\Controllers\Api\RechargeController;
+use App\Http\Controllers\Api\RestaurantController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +32,7 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
         Route::post("user/band/{id}", [AdminUserController::class, "band"]);
         Route::post("user/active/{id}", [AdminUserController::class, "active"]);
         Route::post("/blog/status/{blog}", [AdminBlogController::class, "status"]);
+        Route::apiResource("/restaurant", AdminRestaurantController::class);
     });
 });
 
@@ -51,7 +54,10 @@ Route::apiResource("blog", BlogController::class, ["only" => [
 ]])->middleware("auth:sanctum");
 
 Route::post("/blog/cmt", [BlogController::class, "cmt"])->middleware("auth:sanctum");
+Route::post("/blog/repcmt", [BlogController::class, "replyComment"])->middleware("auth:sanctum");
 Route::post("blog/images", [BlogController::class, "pushImages"]);
+
+Route::apiResource("/restaurant", RestaurantController::class)->middleware("auth:sanctum");
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::group(['prefix' => "recharge"], function(){
