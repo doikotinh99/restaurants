@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\ImageController;
 use App\Http\Controllers\Api\ProvincesController;
 use App\Http\Controllers\Api\RechargeController;
 use App\Http\Controllers\Api\RestaurantController;
+use App\Http\Controllers\Api\TableController;
 use App\Http\Controllers\Api\UserController;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
@@ -67,6 +68,10 @@ Route::post("/restaurant/update", [RestaurantController::class, "update"])->midd
 
 Route::apiResource("/eating", EattingController::class)->middleware("auth:sanctum");
 Route::post("/eating/update", [EattingController::class, "update"])->middleware("auth:sanctum");
+
+
+Route::apiResource("/tableinfo", TableController::class)->middleware("auth:sanctum");
+Route::post("/tableinfo/update", [TableController::class, "update"])->middleware("auth:sanctum");
 
 Route::delete("/image/{id}", [ImageController::class, "destroy"])->middleware("auth:sanctum");
 

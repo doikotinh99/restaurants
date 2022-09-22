@@ -13,6 +13,7 @@ class TableInfo extends Model
         "chair",
         "count",
         "status",
+        "restaurant_id",
         "description"
     ];
 

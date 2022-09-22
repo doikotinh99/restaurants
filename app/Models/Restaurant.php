@@ -29,7 +29,7 @@ class Restaurant extends Model
         return $this->hasMany(Eating::class);
     }
 
-    public function address(){
+    public function isAddress(){
         return $this->hasOne(Address::class, "id", "address");
     }
 

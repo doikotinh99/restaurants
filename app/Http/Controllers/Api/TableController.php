@@ -3,19 +3,18 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Eating;
 use App\Models\Image;
+use App\Models\TableInfo;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class EattingController extends Controller
+class TableController extends Controller
 {
-    /**
+        /**
      * @OA\Get(
-     *     path="/api/eating",
-     *     operationId="EatingOfUser",
-     *     tags={"Eating"},
-     *     summary="All Eating of User",
+     *     path="/api/tableinfo",
+     *     operationId="TableInfo",
+     *     tags={"TableInfo"},
+     *     summary="All TableInfo",
      *     @OA\Response(
      *         response=201,
      *         description="Successful operation",
@@ -26,40 +25,40 @@ class EattingController extends Controller
     public function index()
     {
         //
-        $result = Eating::all();
+        $result = TableInfo::all();
 
         foreach ($result as $val) {
             $val->images;
         }
 
-        return response()->json(["eatting" => $result], 200);
+        return response()->json(["TableInfo" => $result], 200);
     }
 
     /**
      * @OA\Post(
-     *     path="/api/eating",
-     *     operationId="AddEating",
-     *     tags={"Eating"},
-     *     summary="Add Eating",
+     *     path="/api/tableinfo",
+     *     operationId="AddTableInfo",
+     *     tags={"TableInfo"},
+     *     summary="Add TableInfo",
      *     @OA\RequestBody(
      *       @OA\MediaType(
      *           mediaType="multipart/form-data",
      *           @OA\Schema(
      *               type="object",
      *               @OA\Property(
-     *                  property="name",
-     *                  type="text"
-     *               ),
-     *              @OA\Property(
-     *                  property="price",
-     *                  type="text"
-     *               ),
-     *              @OA\Property(
-     *                  property="discount",
-     *                  type="text"
-     *               ),
-     *              @OA\Property(
      *                  property="restaurant_id",
+     *                  type="text"
+     *               ),
+     *               @OA\Property(
+     *                  property="type",
+     *                  type="text"
+     *               ),
+     *              @OA\Property(
+     *                  property="chair",
+     *                  type="text"
+     *               ),
+     *              @OA\Property(
+     *                  property="count",
      *                  type="text"
      *               ),
      *              @OA\Property(
@@ -86,40 +85,41 @@ class EattingController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request->all();
         //
-        $eating = Eating::create([
-            "name" => $request->name,
-            "price" => $request->price,
-            "discount" => $request->discount,
-            "restaurant_id" => $request->restaurant_id,
+        $table = TableInfo::create([
+            "type" => $request->type,
+            "chair" => $request->chair,
+            "count" => $request->count,
             "description" => $request->description,
+            "restaurant_id" => $request->restaurant_id,
             "status" => 1
         ]);
 
         if ($request->image) {
             $files = $request->image;
             foreach ($files as $key => $file) {
-                $images = $file->store("public/eatings");
+                $images = $file->store("public/tables");
                 // $filename = $images->name;
                 $filename = explode("/", $images)[2];
                 $image = new Image([
-                    "path" => "eatings/" . $filename
+                    "path" => "tables/" . $filename
                 ]);
-                $eating->images()->save($image);
+                $table->images()->save($image);
             }
         }
-        return response()->json(["eating" => $eating], 200);
+        return response()->json(["tables" => $table], 200);
     }
 
     /**
      * @OA\get(
-     *     path="/api/eating/{id}",
-     *     operationId="ShowEating",
-     *     tags={"Eating"},
-     *     summary="detailt eating",
+     *     path="/api/tableinfo/{id}",
+     *     operationId="ShowTableInfo",
+     *     tags={"TableInfo"},
+     *     summary="detailt TableInfo",
      *     @OA\Parameter(
      *         name="id",
-     *         description="eating id",
+     *         description="TableInfo id",
      *         required=true,
      *         in="path",
      *         @OA\Schema(
@@ -136,42 +136,38 @@ class EattingController extends Controller
      */
     public function show($id)
     {
-        $result = Eating::where("id", $id)->get();
+        $result = TableInfo::where("id", $id)->get();
         if(isset($result->images)){
             $result->images;
         }
-        return response()->json(["eatting" => $result], 200);
+        return response()->json(["TableInfo" => $result], 200);
     }
 
     /**
      * @OA\Post(
-     *     path="/api/eating/update",
-     *     operationId="editEating",
-     *     tags={"Eating"},
-     *     summary="Edit Eating",
-     *      @OA\RequestBody(
+     *     path="/api/tableinfo/update",
+     *     operationId="editTableInfo",
+     *     tags={"TableInfo"},
+     *     summary="Edit TableInfo",
+     *          @OA\RequestBody(
      *       @OA\MediaType(
      *           mediaType="multipart/form-data",
      *           @OA\Schema(
      *               type="object",
-     *               @OA\Property(
+     *           @OA\Property(
      *                  property="id",
      *                  type="text"
      *               ),
      *               @OA\Property(
-     *                  property="name",
+     *                  property="type",
      *                  type="text"
      *               ),
      *              @OA\Property(
-     *                  property="price",
+     *                  property="chair",
      *                  type="text"
      *               ),
      *              @OA\Property(
-     *                  property="discount",
-     *                  type="time"
-     *               ),
-     *              @OA\Property(
-     *                  property="restaurant_id",
+     *                  property="count",
      *                  type="time"
      *               ),
      *              @OA\Property(
@@ -198,26 +194,24 @@ class EattingController extends Controller
      */
     public function update(Request $request)
     {
-        $eating = Eating::find($request->id)->first();
-        if ($request->user()->id != $eating->user_id)
-            return response()->json(["msg" => "false user"], 404);
-        $result = $eating->update([
-            "name" => $request->name,
-            "price" => $request->price,
-            "discount" => $request->discount,
+        $tableInfo = TableInfo::find($request->id)->first();
+        $result = $tableInfo->update([
+            "type" => $request->type,
+            "chair" => $request->chair,
+            "count" => $request->count,
             "description" => $request->description
         ]);
 
         if ($request->image) {
             $files = $request->image;
             foreach ($files as $key => $file) {
-                $images = $file->store("public/eatings");
+                $images = $file->store("public/tables");
                 // $filename = $images->name;
                 $filename = explode("/", $images)[2];
                 $image = new Image([
-                    "path" => "eatings/" . $filename
+                    "path" => "tables/" . $filename
                 ]);
-                $eating->images()->save($image);
+                $tableInfo->images()->save($image);
             }
         }
         return response()->json(["restaurant" => $result], 200);
@@ -225,13 +219,13 @@ class EattingController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/api/eating/{id}",
-     *     operationId="deleteEating",
-     *     tags={"Eating"},
-     *     summary="Delete Eating",
+     *     path="/api/tableinfo/{id}",
+     *     operationId="deletetableInfo",
+     *     tags={"TableInfo"},
+     *     summary="Delete tableInfo",
      *     @OA\Parameter(
      *         name="id",
-     *         description="Eating id",
+     *         description="tableInfo id",
      *         required=true,
      *         in="path",
      *         @OA\Schema(
@@ -245,10 +239,10 @@ class EattingController extends Controller
      *     security={{"bearer":{}}},
      * )
      */
-    public function destroy(Eating $eating)
+    public function destroy(TableInfo $tableInfo)
     {
-        $eating->delete();
-        $eating->images()->delete();
-        return response()->json(["eating" => "deleted"], 200);
+        $tableInfo->delete();
+        $tableInfo->images()->delete();
+        return response()->json(["tableInfo" => "deleted"], 200);
     }
 }

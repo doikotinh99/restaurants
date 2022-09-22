@@ -35,6 +35,7 @@ class RestaurantController extends Controller
                 $eacting->images;
             }
             $val->images;
+            $val->isAddress;
         }
         
         return response()->json(["restaurant" => $result], 200);

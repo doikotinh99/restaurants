@@ -617,10 +617,10 @@
                                         "type": "text"
                                     },
                                     "discount": {
-                                        "type": "time"
+                                        "type": "text"
                                     },
                                     "restaurant_id": {
-                                        "type": "time"
+                                        "type": "text"
                                     },
                                     "description": {
                                         "type": "text"
@@ -1063,6 +1063,185 @@
                                         "type": "time"
                                     },
                                     "time_end": {
+                                        "type": "time"
+                                    },
+                                    "description": {
+                                        "type": "text"
+                                    },
+                                    "image[]": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success with some route data"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/tableinfo": {
+            "get": {
+                "tags": [
+                    "TableInfo"
+                ],
+                "summary": "All TableInfo",
+                "operationId": "TableInfo",
+                "responses": {
+                    "201": {
+                        "description": "Successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "TableInfo"
+                ],
+                "summary": "Add TableInfo",
+                "operationId": "AddTableInfo",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "restaurant_id": {
+                                        "type": "text"
+                                    },
+                                    "type": {
+                                        "type": "text"
+                                    },
+                                    "chair": {
+                                        "type": "text"
+                                    },
+                                    "count": {
+                                        "type": "text"
+                                    },
+                                    "description": {
+                                        "type": "text"
+                                    },
+                                    "image[]": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success with some route data"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/tableinfo/{id}": {
+            "get": {
+                "tags": [
+                    "TableInfo"
+                ],
+                "summary": "detailt TableInfo",
+                "operationId": "ShowTableInfo",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "TableInfo id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success with some route data"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "TableInfo"
+                ],
+                "summary": "Delete tableInfo",
+                "operationId": "deletetableInfo",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "tableInfo id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success with some route data"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/tableinfo/update": {
+            "post": {
+                "tags": [
+                    "TableInfo"
+                ],
+                "summary": "Edit TableInfo",
+                "operationId": "editTableInfo",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "id": {
+                                        "type": "text"
+                                    },
+                                    "type": {
+                                        "type": "text"
+                                    },
+                                    "chair": {
+                                        "type": "text"
+                                    },
+                                    "count": {
                                         "type": "time"
                                     },
                                     "description": {
