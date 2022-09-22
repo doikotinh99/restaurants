@@ -3,19 +3,19 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Eating;
 use App\Models\Image;
-use App\Models\Restaurant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class RestaurantController extends Controller
+class EattingController extends Controller
 {
     /**
      * @OA\Get(
-     *     path="/api/restaurant",
-     *     operationId="RestaurantOfUser",
-     *     tags={"Restaurant"},
-     *     summary="All Restaurant of User",
+     *     path="/api/eating",
+     *     operationId="EatingOfUser",
+     *     tags={"Eating"},
+     *     summary="All Eating of User",
      *     @OA\Response(
      *         response=201,
      *         description="Successful operation",
@@ -25,30 +25,22 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        $result = Restaurant::where("user_id", Auth::user()->id)->get();
+        //
+        $result = Eating::all();
 
         foreach ($result as $val) {
-            $val->user;
-
-            foreach ($val->tables as $tables) {
-                $tables->images;
-            }
-            foreach ($val->menu as $eacting) {
-                $eacting->images;
-            }
             $val->images;
-            $val->address;
         }
 
-        return response()->json(["restaurant" => $result], 200);
+        return response()->json(["eatting" => $result], 200);
     }
 
     /**
      * @OA\Post(
-     *     path="/api/restaurant",
-     *     operationId="AddRestaurant",
-     *     tags={"Restaurant"},
-     *     summary="Add restaurant",
+     *     path="/api/eating",
+     *     operationId="AddEating",
+     *     tags={"Eating"},
+     *     summary="Add Eating",
      *     @OA\RequestBody(
      *       @OA\MediaType(
      *           mediaType="multipart/form-data",
@@ -59,15 +51,15 @@ class RestaurantController extends Controller
      *                  type="text"
      *               ),
      *              @OA\Property(
-     *                  property="address",
+     *                  property="price",
      *                  type="text"
      *               ),
      *              @OA\Property(
-     *                  property="time_start",
+     *                  property="discount",
      *                  type="time"
      *               ),
      *              @OA\Property(
-     *                  property="time_end",
+     *                  property="restaurant_id",
      *                  type="time"
      *               ),
      *              @OA\Property(
@@ -94,39 +86,40 @@ class RestaurantController extends Controller
      */
     public function store(Request $request)
     {
-        $restaurant = Restaurant::create([
-            "user_id" => $request->user()->id,
+        //
+        $eating = Eating::create([
             "name" => $request->name,
-            "address" => $request->address,
-            "time_start" => $request->time_start,
-            "time_end" => $request->time_end,
-            "description" => $request->description
+            "price" => $request->price,
+            "discount" => $request->discount,
+            "restaurant_id" => $request->restaurant_id,
+            "description" => $request->description,
+            "status" => 1
         ]);
 
         if ($request->image) {
             $files = $request->image;
             foreach ($files as $key => $file) {
-                $images = $file->store("public/restaurants");
+                $images = $file->store("public/eatings");
                 // $filename = $images->name;
                 $filename = explode("/", $images)[2];
                 $image = new Image([
-                    "path" => "restaurants/" . $filename
+                    "path" => "eatings/" . $filename
                 ]);
-                $restaurant->images()->save($image);
+                $eating->images()->save($image);
             }
         }
-        return response()->json(["restaurant" => $restaurant], 200);
+        return response()->json(["eating" => $eating], 200);
     }
 
     /**
      * @OA\get(
-     *     path="/api/restaurant/{id}",
-     *     operationId="ShowRestaurant",
-     *     tags={"Restaurant"},
-     *     summary="detailt restaurant",
+     *     path="/api/eating/{id}",
+     *     operationId="ShowEating",
+     *     tags={"Eating"},
+     *     summary="detailt eating",
      *     @OA\Parameter(
      *         name="id",
-     *         description="restaurant id",
+     *         description="eating id",
      *         required=true,
      *         in="path",
      *         @OA\Schema(
@@ -143,29 +136,20 @@ class RestaurantController extends Controller
      */
     public function show($id)
     {
-        $result = Restaurant::where("user_id", Auth::user()->id)->where("id", $id)->first();
-
-        $result->user;
-
-        foreach ($result->tables as $tables) {
-            $tables->images;
+        $result = Eating::where("id", $id)->get();
+        if(isset($result->images)){
+            $result->images;
         }
-        foreach ($result->menu as $eacting) {
-            $eacting->images;
-        }
-        $result->images;
-        $result->address;
-
-        return response()->json(["restaurant" => $result], 200);
+        return response()->json(["eatting" => $result], 200);
     }
 
     /**
      * @OA\Post(
-     *     path="/api/restaurant/update",
-     *     operationId="editRestaurant",
-     *     tags={"Restaurant"},
-     *     summary="Edit restaurant",
-     *     @OA\RequestBody(
+     *     path="/api/eating/update",
+     *     operationId="editEating",
+     *     tags={"Eating"},
+     *     summary="Edit Eating",
+     *      @OA\RequestBody(
      *       @OA\MediaType(
      *           mediaType="multipart/form-data",
      *           @OA\Schema(
@@ -174,20 +158,20 @@ class RestaurantController extends Controller
      *                  property="id",
      *                  type="text"
      *               ),
-     *              @OA\Property(
+     *               @OA\Property(
      *                  property="name",
      *                  type="text"
      *               ),
      *              @OA\Property(
-     *                  property="address",
+     *                  property="price",
      *                  type="text"
      *               ),
      *              @OA\Property(
-     *                  property="time_start",
+     *                  property="discount",
      *                  type="time"
      *               ),
      *              @OA\Property(
-     *                  property="time_end",
+     *                  property="restaurant_id",
      *                  type="time"
      *               ),
      *              @OA\Property(
@@ -214,28 +198,26 @@ class RestaurantController extends Controller
      */
     public function update(Request $request)
     {
-        
-        $restaurant = Restaurant::find($request->id)->first();
-        if ($request->user()->id != $restaurant->user_id)
+        $eating = Eating::find($request->id)->first();
+        if ($request->user()->id != $eating->user_id)
             return response()->json(["msg" => "false user"], 404);
-        $result = $restaurant->update([
+        $result = $eating->update([
             "name" => $request->name,
-            "address" => $request->address,
-            "time_start" => $request->time_start,
-            "time_end" => $request->time_end,
+            "price" => $request->price,
+            "discount" => $request->discount,
             "description" => $request->description
         ]);
 
         if ($request->image) {
             $files = $request->image;
             foreach ($files as $key => $file) {
-                $images = $file->store("public/restaurants");
+                $images = $file->store("public/eatings");
                 // $filename = $images->name;
                 $filename = explode("/", $images)[2];
                 $image = new Image([
-                    "path" => "restaurants/" . $filename
+                    "path" => "eatings/" . $filename
                 ]);
-                $restaurant->images()->save($image);
+                $eating->images()->save($image);
             }
         }
         return response()->json(["restaurant" => $result], 200);
@@ -243,13 +225,13 @@ class RestaurantController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/api/restaurant/{id}",
-     *     operationId="deleteRestaurant",
-     *     tags={"Restaurant"},
-     *     summary="Delete restaurant",
+     *     path="/api/eating/{id}",
+     *     operationId="deleteEating",
+     *     tags={"Eating"},
+     *     summary="Delete Eating",
      *     @OA\Parameter(
      *         name="id",
-     *         description="restaurant id",
+     *         description="Eating id",
      *         required=true,
      *         in="path",
      *         @OA\Schema(
@@ -263,13 +245,10 @@ class RestaurantController extends Controller
      *     security={{"bearer":{}}},
      * )
      */
-    public function destroy(Restaurant $restaurant)
+    public function destroy(Eating $eating)
     {
-        $restaurant->delete();
-        $restaurant->tables()->delete();
-        $restaurant->menu()->delete();
-        $restaurant->address()->delete();
-        $restaurant->images()->delete();
-        return response()->json(["restaurant" => "deleted"], 200);
+        $eating->delete();
+        $eating->images()->delete();
+        return response()->json(["eating" => "deleted"], 200);
     }
 }

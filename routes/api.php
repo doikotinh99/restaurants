@@ -1,12 +1,17 @@
 <?php
 
+use App\Http\Controllers\Api\AddressController;
 use App\Http\Controllers\Api\Admin\BlogController as AdminBlogController;
 use App\Http\Controllers\Api\Admin\RestaurantController as AdminRestaurantController;
 use App\Http\Controllers\Api\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Api\BlogController;
+use App\Http\Controllers\Api\EattingController;
+use App\Http\Controllers\Api\ImageController;
+use App\Http\Controllers\Api\ProvincesController;
 use App\Http\Controllers\Api\RechargeController;
 use App\Http\Controllers\Api\RestaurantController;
 use App\Http\Controllers\Api\UserController;
+use App\Models\Restaurant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -58,6 +63,16 @@ Route::post("/blog/repcmt", [BlogController::class, "replyComment"])->middleware
 Route::post("blog/images", [BlogController::class, "pushImages"]);
 
 Route::apiResource("/restaurant", RestaurantController::class)->middleware("auth:sanctum");
+Route::post("/restaurant/update", [RestaurantController::class, "update"])->middleware("auth:sanctum");
+
+Route::apiResource("/eating", EattingController::class)->middleware("auth:sanctum");
+Route::post("/eating/update", [EattingController::class, "update"])->middleware("auth:sanctum");
+
+Route::delete("/image/{id}", [ImageController::class, "destroy"])->middleware("auth:sanctum");
+
+Route::apiResource("/address", AddressController::class);
+Route::apiResource("/province", ProvincesController::class);
+
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::group(['prefix' => "recharge"], function(){

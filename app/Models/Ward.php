@@ -5,15 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Address_district extends Model
+class Ward extends Model
 {
     use HasFactory;
     protected $fillable = [
         "name",
-        "city_id"
+        "district_id"
     ];
-
-    public function ward(){
-        return $this->hasMany(Ward::class, "district_id", "id");
-    }
 }

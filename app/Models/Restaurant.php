@@ -13,7 +13,8 @@ class Restaurant extends Model
         "name",
         "address",
         "time_start",
-        "time_end"
+        "time_end",
+        "description"
     ];
 
     public function user(){
@@ -28,8 +29,8 @@ class Restaurant extends Model
         return $this->hasMany(Eating::class);
     }
 
-    public function addres(){
-        return $this->hasOne(Address::class);
+    public function address(){
+        return $this->hasOne(Address::class, "id", "address");
     }
 
     public function images(){
