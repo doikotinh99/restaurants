@@ -264,7 +264,7 @@ class UserController extends Controller
         if ($request->password !== $request->cpassword)
             return response()->json(['msg' => 'Confirm password is incorrect'], 400);
         if ($this->checkMail($request->email))
-            return response()->json(['msg' => 'Email already exists.'], 400);
+            return ['msg' => 'Email already exists.'];
 
         $result = User::create([
             'name' => $request->name,
