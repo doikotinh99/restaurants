@@ -262,7 +262,7 @@ class UserController extends Controller
     {
         // return $request->all();
         if ($request->password !== $request->cpassword)
-            return response()->json(['msg' => 'Confirm password is incorrect'], 400);
+            return ['msg' => 'Confirm password is incorrect'];
         if ($this->checkMail($request->email))
             return ['msg' => 'Email already exists.'];
 
