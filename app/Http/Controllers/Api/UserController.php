@@ -59,9 +59,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        // if(Auth::user()->id == $id)
-            // return response()->json(["datas" => User::find($id)], 200);
-        return response()->json(["msg" => Auth::user()->id], 404);
+        if(Auth::user()->id == $id)
+            return response()->json(["datas" => User::find($id)], 200);
+        return response()->json(["msg" => "false method"], 404);
     }
 
     /**
