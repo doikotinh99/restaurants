@@ -39,10 +39,29 @@ class UserController extends Controller
     {
         return response()->json(["msg" => "false method"], 404);
     }
-    
+    /**
+     * @OA\Get(
+     *     path="/api/user/{id}",
+     *     tags={"Account"},
+     *     summary="Get user",
+     *     operationId="isUsers",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="get user"
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success with some route data"
+     *     ),
+     *     security={{"bearer":{}}},
+     * )
+     */
     public function show($id)
     {
-        return response()->json(["msg" => "false method"], 404);
+        // if(Auth::user()->id == $id)
+            // return response()->json(["datas" => User::find($id)], 200);
+        return response()->json(["msg" => Auth::user()->id], 404);
     }
 
     /**
