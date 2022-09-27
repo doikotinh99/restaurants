@@ -172,10 +172,10 @@ class UserController extends Controller
      *      security={{"bearer":{}}},
      *)
      */
-    public function logout(Request $request)
+    public function logout()
     {
-        $request->user()->currentAccessToken()->delete();
-        return response()->json(["msg" => "logout"], 200);
+        // Auth::user()->currentAccessToken()->delete();
+        return response()->json(["msg" => Auth::user()], 200);
     }
 
 
