@@ -29,27 +29,12 @@ use Illuminate\Support\Facades\Hash;
  */
 class UserController extends Controller
 {
-
-    public function index()
-    {
-        return response()->json(["msg" => "false method"], 404);
-    }
-
-    public function store(Request $request)
-    {
-        return response()->json(["msg" => "false method"], 404);
-    }
     /**
      * @OA\Get(
-     *     path="/api/user/{id}",
+     *     path="/api/user",
      *     tags={"Account"},
      *     summary="Get user",
      *     operationId="isUsers",
-     *     @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         description="get user"
-     *     ),
      *     @OA\Response(
      *         response=200,
      *         description="Success with some route data"
@@ -57,10 +42,18 @@ class UserController extends Controller
      *     security={{"bearer":{}}},
      * )
      */
+    public function index()
+    {
+        return response()->json(["datas" => Auth::user()], 200);
+    }
+
+    public function store(Request $request)
+    {
+        return response()->json(["msg" => "false method"], 404);
+    }
+
     public function show($id)
     {
-        if(Auth::user()->id == $id)
-            return response()->json(["datas" => User::find($id)], 200);
         return response()->json(["msg" => "false method"], 404);
     }
 
@@ -131,7 +124,7 @@ class UserController extends Controller
         if ($id == $user->id) {
             $check = $this->checkInfor($id);
             if (!$check) {
-                
+
                 if ($request->phone) UserInfor::where("id", $id)->update(["phone" => $request->phone]);;
                 if ($request->address) UserInfor::where("id", $id)->update(["address" => $request->address]);;
                 if ($request->gender) UserInfor::where("id", $id)->update(["phogenderne" => $request->gender]);;
@@ -159,7 +152,7 @@ class UserController extends Controller
         }
         return true;
     }
-    
+
     public function destroy($id)
     {
         //
@@ -179,13 +172,14 @@ class UserController extends Controller
      *      security={{"bearer":{}}},
      *)
      */
-    public function logout(Request $request){
+    public function logout(Request $request)
+    {
         $request->user()->currentAccessToken()->delete();
         return response()->json(["msg" => "logout"], 200);
     }
 
 
-    
+
     /**
      * @OA\Post(
      *     path="/api/login",
@@ -220,7 +214,7 @@ class UserController extends Controller
         $validated = $request->validated();
         if (Auth::attempt($validated)) {
             $user = Auth::user();
-            if($user->status != 1) 
+            if ($user->status != 1)
                 return response()->json(["msg" => "band"], 201);
             $token = $user->createToken('kenny')->plainTextToken;
             return response()->json(['user' => $user, 'token' => $token], 200);

@@ -1272,20 +1272,13 @@
                 ]
             }
         },
-        "/api/user/{id}": {
+        "/api/user": {
             "get": {
                 "tags": [
                     "Account"
                 ],
                 "summary": "Get user",
                 "operationId": "isUsers",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "get user"
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "Success with some route data"
@@ -1296,7 +1289,9 @@
                         "bearer": []
                     }
                 ]
-            },
+            }
+        },
+        "/api/user/{id}": {
             "put": {
                 "tags": [
                     "Account"
