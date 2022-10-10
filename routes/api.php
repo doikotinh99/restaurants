@@ -65,8 +65,8 @@ Route::post("blog/images", [BlogController::class, "pushImages"]);
 Route::apiResource("/restaurant", RestaurantController::class, ["only" => ["index"]]);
 Route::apiResource("/restaurant", RestaurantController::class, ["except" => ["index"]])->middleware("auth:sanctum");
 Route::post("/restaurant/update", [RestaurantController::class, "update"])->middleware("auth:sanctum");
-
-Route::apiResource("/eating", EattingController::class)->middleware("auth:sanctum");
+Route::apiResource("/eating", EattingController::class, ["only" => ["index"]]);
+Route::apiResource("/eating", EattingController::class, ["except" => ["index"]])->middleware("auth:sanctum");
 Route::post("/eating/update", [EattingController::class, "update"])->middleware("auth:sanctum");
 
 
