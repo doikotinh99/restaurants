@@ -99,11 +99,14 @@ class EattingController extends Controller
         if ($request->image) {
             $files = $request->image;
             foreach ($files as $key => $file) {
-                $images = $file->store("public/eatings");
+                // $images = $file->store("public/eatings");
                 // $filename = $images->name;
-                $filename = explode("/", $images)[2];
+                // $filename = explode("/", $images)[2];
+                $ext = $file->extension();
+                $fileName = 'eatings-' . time() . '.' . $ext;
+                $file->move(public_path("images/eatings"), $fileName);
                 $image = new Image([
-                    "path" => "eatings/" . $filename
+                    "path" => "eatings/" . $fileName
                 ]);
                 $eating->images()->save($image);
             }
@@ -211,11 +214,11 @@ class EattingController extends Controller
         if ($request->image) {
             $files = $request->image;
             foreach ($files as $key => $file) {
-                $images = $file->store("public/eatings");
-                // $filename = $images->name;
-                $filename = explode("/", $images)[2];
+                $ext = $file->extension();
+                $fileName = 'eatings-' . time() . '.' . $ext;
+                $file->move(public_path("images/eatings"), $fileName);
                 $image = new Image([
-                    "path" => "eatings/" . $filename
+                    "path" => "eatings/" . $fileName
                 ]);
                 $eating->images()->save($image);
             }

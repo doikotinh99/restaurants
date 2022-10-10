@@ -99,11 +99,17 @@ class TableController extends Controller
         if ($request->image) {
             $files = $request->image;
             foreach ($files as $key => $file) {
-                $images = $file->store("public/tables");
-                // $filename = $images->name;
-                $filename = explode("/", $images)[2];
+                // $images = $file->store("public/tables");
+                // // $filename = $images->name;
+                // $filename = explode("/", $images)[2];
+                // $image = new Image([
+                //     "path" => "tables/" . $filename
+                // ]);
+                $ext = $file->extension();
+                $fileName = 'tables-' . time() . '.' . $ext;
+                $file->move(public_path("images/tables"), $fileName);
                 $image = new Image([
-                    "path" => "tables/" . $filename
+                    "path" => "tables/" . $fileName
                 ]);
                 $table->images()->save($image);
             }
@@ -205,11 +211,14 @@ class TableController extends Controller
         if ($request->image) {
             $files = $request->image;
             foreach ($files as $key => $file) {
-                $images = $file->store("public/tables");
-                // $filename = $images->name;
-                $filename = explode("/", $images)[2];
+                // $images = $file->store("public/tables");
+                // // $filename = $images->name;
+                // $filename = explode("/", $images)[2];
+                $ext = $file->extension();
+                $fileName = 'tables-' . time() . '.' . $ext;
+                $file->move(public_path("images/tables"), $fileName);
                 $image = new Image([
-                    "path" => "tables/" . $filename
+                    "path" => "tables/" . $fileName
                 ]);
                 $tableInfo->images()->save($image);
             }

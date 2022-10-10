@@ -108,11 +108,14 @@ class RestaurantController extends Controller
         if ($request->image) {
             $files = $request->image;
             foreach ($files as $key => $file) {
-                $images = $file->store("public/restaurants");
-                // $filename = $images->name;
-                $filename = explode("/", $images)[2];
+                // $images = $file->store("public/restaurants");
+                // // $filename = $images->name;
+                // $filename = explode("/", $images)[2];
+                $ext = $file->extension();
+                $fileName = 'restaurants-' . time() . '.' . $ext;
+                $file->move(public_path("images/restaurants"), $fileName);
                 $image = new Image([
-                    "path" => "restaurants/" . $filename
+                    "path" => "restaurants/" . $fileName
                 ]);
                 $restaurant->images()->save($image);
             }
@@ -231,11 +234,14 @@ class RestaurantController extends Controller
         if ($request->image) {
             $files = $request->image;
             foreach ($files as $key => $file) {
-                $images = $file->store("public/restaurants");
-                // $filename = $images->name;
-                $filename = explode("/", $images)[2];
+                // $images = $file->store("public/restaurants");
+                // // $filename = $images->name;
+                // $filename = explode("/", $images)[2];
+                $ext = $file->extension();
+                $fileName = 'restaurants-' . time() . '.' . $ext;
+                $file->move(public_path("images/restaurants"), $fileName);
                 $image = new Image([
-                    "path" => "restaurants/" . $filename
+                    "path" => "restaurants/" . $fileName
                 ]);
                 $restaurant->images()->save($image);
             }

@@ -91,11 +91,14 @@ class BlogController extends Controller
         if ($request->image) {
             $files = $request->image;
             foreach ($files as $key => $file) {
-                $images = $file->store("public/blogs");
+                // $images = $file->store("public/blogs");
+                
                 // $filename = $images->name;
-                $filename = explode("/", $images)[2];
+                $ext = $file->extension();
+                $fileName = 'blog-' . time() . '.' . $ext;
+                $file->move(public_path("images/blogs"), $fileName);
                 $image = new Image([
-                    "path" => "blogs/" . $filename
+                    "path" => "images/blogs/" . $fileName
                 ]);
                 $result->images()->save($image);
             }
