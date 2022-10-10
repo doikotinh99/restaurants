@@ -25,7 +25,7 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        $result = Restaurant::where("user_id", Auth::user()->id)->get();
+        $result = Restaurant::all();
 
         foreach ($result as $val) {
             $val->user;
