@@ -30,6 +30,7 @@ class EattingController extends Controller
 
         foreach ($result as $val) {
             $val->images;
+            $val->restaurant();
         }
 
         return response()->json(["eatting" => $result], 200);

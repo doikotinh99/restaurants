@@ -20,4 +20,8 @@ class Eating extends Model
     public function images(){
         return $this->morphMany(Image::class, "imageble");
     }
+
+    public function restaurant(){
+        return $this->hasOne(Restaurant::class);
+    }
 }
