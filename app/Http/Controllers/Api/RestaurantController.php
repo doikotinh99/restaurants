@@ -148,9 +148,9 @@ class RestaurantController extends Controller
      * 
      * )
      */
-    public function show($id)
+    public function show($slug)
     {
-        $result = Restaurant::where("user_id", Auth::user()->id)->where("id", $id)->first();
+        $result = Restaurant::where("slug", $slug)->first();
 
         $result->user;
 
