@@ -1002,12 +1002,7 @@
                     "200": {
                         "description": "Success with some route data"
                     }
-                },
-                "security": [
-                    {
-                        "bearer": []
-                    }
-                ]
+                }
             },
             "delete": {
                 "tags": [

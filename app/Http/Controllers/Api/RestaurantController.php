@@ -144,7 +144,6 @@ class RestaurantController extends Controller
      *         response=200,
      *         description="Success with some route data"
      *     ),
-     *     security={{"bearer":{}}},
      * 
      * )
      */
