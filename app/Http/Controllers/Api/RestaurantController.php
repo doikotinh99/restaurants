@@ -137,7 +137,7 @@ class RestaurantController extends Controller
      *         required=true,
      *         in="path",
      *         @OA\Schema(
-     *             type="integer"
+     *             type="text"
      *         )
      *     ),
      *     @OA\Response(
