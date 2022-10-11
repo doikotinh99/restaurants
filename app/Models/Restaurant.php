@@ -14,7 +14,8 @@ class Restaurant extends Model
         "address",
         "time_start",
         "time_end",
-        "description"
+        "description",
+        "slug"
     ];
 
     public function user(){

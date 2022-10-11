@@ -7,6 +7,7 @@ use App\Models\Image;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class RestaurantController extends Controller
 {
@@ -102,7 +103,8 @@ class RestaurantController extends Controller
             "address" => $request->address,
             "time_start" => $request->time_start,
             "time_end" => $request->time_end,
-            "description" => $request->description
+            "description" => $request->description,
+            "slug" => Str::slug($request->name, "-")."-".time()
         ]);
 
         if ($request->image) {
@@ -228,7 +230,8 @@ class RestaurantController extends Controller
             "address" => $request->address,
             "time_start" => $request->time_start,
             "time_end" => $request->time_end,
-            "description" => $request->description
+            "description" => $request->description,
+            "slug" => Str::slug($request->name, "-")."-".time()
         ]);
 
         if ($request->image) {
