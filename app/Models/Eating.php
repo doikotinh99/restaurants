@@ -22,6 +22,6 @@ class Eating extends Model
     }
 
     public function restaurant(){
-        return $this->hasOne(Restaurant::class, "id", "restaurant_id");
+        return $this->hasOne(Restaurant::class, "restaurant_id", "id");
     }
 }
