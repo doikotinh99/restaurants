@@ -994,7 +994,7 @@
                         "description": "restaurant id",
                         "required": true,
                         "schema": {
-                            "type": "text"
+                            "type": "string"
                         }
                     }
                 ],
