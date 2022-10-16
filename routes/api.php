@@ -90,6 +90,3 @@ Route::middleware(['auth:sanctum'])->group(function () {
     });
 });
 
-git add .
-git commit -m "add top discount"
-git push origin main 
