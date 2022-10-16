@@ -44,7 +44,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        return response()->json(["datas" => Auth::user()], 200);
+        $user = Auth::user();
+        foreach($user as $val)
+            $user->infor;
+        return $user;
     }
 
     public function store(Request $request)
