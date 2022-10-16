@@ -86,3 +86,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get("check", [RechargeController::class, "check"]);
     });
 });
+
+Route::get("/eating/top-discount", [EattingController::class, "topDiscount"]);

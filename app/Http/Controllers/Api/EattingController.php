@@ -255,4 +255,16 @@ class EattingController extends Controller
         $eating->images()->delete();
         return response()->json(["eating" => "deleted"], 200);
     }
+
+    public function topDiscount(){
+        $result = Eating::orderBy('discount', 'desc')
+        ->get();
+
+        foreach ($result as $val) {
+            $val->images;
+            $val->restaurant;
+        }
+
+        return $result;
+    }
 }
