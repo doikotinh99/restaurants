@@ -151,7 +151,7 @@ class RestaurantController extends Controller
     {
         $result = Restaurant::where("slug", $slug)->first();
 
-        $result->user->infor;
+        $result->user->info;
         foreach ($result->tables as $tables) {
             $tables->images;
         }
