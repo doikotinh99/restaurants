@@ -16,7 +16,7 @@ class UserInfor extends Model
         "birday"
     ];
 
-    public function user(){
-        return $this->hasOne(User::class);
+    public function isAddress(){
+        return $this->hasOne(Address::class, "id", "address");
     }
 }

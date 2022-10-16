@@ -152,7 +152,6 @@ class RestaurantController extends Controller
         $result = Restaurant::where("slug", $slug)->first();
 
         $result->user->infor;
-
         foreach ($result->tables as $tables) {
             $tables->images;
         }
@@ -160,7 +159,7 @@ class RestaurantController extends Controller
             $eacting->images;
         }
         $result->images;
-        $result->address;
+        $result->isAddress;
 
         return response()->json(["restaurant" => $result], 200);
     }
