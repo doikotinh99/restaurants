@@ -62,9 +62,12 @@ Route::apiResource("blog", BlogController::class, ["only" => [
 Route::post("/blog/cmt", [BlogController::class, "cmt"])->middleware("auth:sanctum");
 Route::post("/blog/repcmt", [BlogController::class, "replyComment"])->middleware("auth:sanctum");
 Route::post("blog/images", [BlogController::class, "pushImages"]);
+
 Route::apiResource("/restaurant", RestaurantController::class, ["only" => ["show", "index"]]);
 Route::apiResource("/restaurant", RestaurantController::class, ["except" => ["show", "index"]])->middleware("auth:sanctum");
 Route::post("/restaurant/update", [RestaurantController::class, "update"])->middleware("auth:sanctum");
+
+Route::get("/eating/top-discount", [EattingController::class, "topDiscount"]);
 Route::apiResource("/eating", EattingController::class, ["only" => ["index"]]);
 Route::apiResource("/eating", EattingController::class, ["except" => ["index", "topDiscount"]])->middleware("auth:sanctum");
 Route::post("/eating/update", [EattingController::class, "update"])->middleware("auth:sanctum");
@@ -87,4 +90,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     });
 });
 
-Route::get("/eating/top-discount", [EattingController::class, "topDiscount"]);
+git add .
+git commit -m "add top discount"
+git push origin main 
