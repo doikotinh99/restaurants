@@ -258,6 +258,7 @@ class EattingController extends Controller
 
     public function topDiscount(){
         $result = Eating::orderBy('discount', 'desc')
+        ->limit(12)
         ->get();
 
         foreach ($result as $val) {
