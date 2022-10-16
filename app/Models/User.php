@@ -45,6 +45,6 @@ class User extends Authenticatable
     ];
 
     public function infor(){
-        return $this->hasOne(UserInfor::class, "id", "user_id");
+        return $this->hasOne(UserInfor::class);
     }
 }
