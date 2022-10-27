@@ -69,7 +69,6 @@ class VoteController extends Controller
      */
     public function store(Request $request)
     {
-        return $request->restaurant_id;
         $vote = Vote::create([
             "user_id" => $request->user()->id,
             "vote" => $request->vote,
