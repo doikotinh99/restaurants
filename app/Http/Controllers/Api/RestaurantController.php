@@ -41,6 +41,10 @@ class RestaurantController extends Controller
             $val->isAddress->isCity;
             $val->isAddress->isDistrict;
             $val->isAddress->isWards;
+            
+            foreach ($val->vote as $vote) {
+                $vote->isUser;
+            }
         }
 
         return response()->json(["restaurant" => $result], 200);

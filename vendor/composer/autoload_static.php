@@ -598,6 +598,7 @@ class ComposerStaticInit93fa512064d87ab259ad20542419a59f
         'App\\Models\\TableInfo' => __DIR__ . '/../..' . '/app/Models/TableInfo.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Models\\UserInfor' => __DIR__ . '/../..' . '/app/Models/UserInfor.php',
+        'App\\Models\\Vote' => __DIR__ . '/../..' . '/app/Models/Vote.php',
         'App\\Models\\Ward' => __DIR__ . '/../..' . '/app/Models/Ward.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',

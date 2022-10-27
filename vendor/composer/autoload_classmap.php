@@ -52,6 +52,7 @@ return array(
     'App\\Models\\TableInfo' => $baseDir . '/app/Models/TableInfo.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Models\\UserInfor' => $baseDir . '/app/Models/UserInfor.php',
+    'App\\Models\\Vote' => $baseDir . '/app/Models/Vote.php',
     'App\\Models\\Ward' => $baseDir . '/app/Models/Ward.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',

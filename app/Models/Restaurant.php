@@ -37,4 +37,8 @@ class Restaurant extends Model
     public function images(){
         return $this->morphMany(Image::class, "imageble");
     }
+
+    public function vote(){
+        return $this->hasMany(Vote::class);
+    }
 }
