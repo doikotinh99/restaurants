@@ -69,7 +69,7 @@ class VoteController extends Controller
      */
     public function store(Request $request)
     {
-        return $request->all();
+        return $request->user()->id;
         $vote = Vote::create([
             "user_id" => $request->user()->id,
             "vote" => $request->vote,
