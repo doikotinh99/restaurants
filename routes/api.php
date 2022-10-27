@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\RechargeController;
 use App\Http\Controllers\Api\RestaurantController;
 use App\Http\Controllers\Api\TableController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\VoteController;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -81,6 +82,7 @@ Route::delete("/image/{id}", [ImageController::class, "destroy"])->middleware("a
 Route::apiResource("/address", AddressController::class);
 Route::apiResource("/province", ProvincesController::class);
 
+Route::apiResource("/vote", VoteController::class)->middleware("auth:sanctum");
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::group(['prefix' => "recharge"], function(){
