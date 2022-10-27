@@ -287,6 +287,7 @@ class RestaurantController extends Controller
         $restaurant->menu()->delete();
         $restaurant->address()->delete();
         $restaurant->images()->delete();
+        $restaurant->vote()->delete();
         return response()->json(["restaurant" => "deleted"], 200);
     }
 }
