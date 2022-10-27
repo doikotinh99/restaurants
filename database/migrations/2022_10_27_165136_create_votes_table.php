@@ -16,10 +16,18 @@ class CreateVotesTable extends Migration
         Schema::create('votes', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("user_id");
-            $table->interger("vote");
+            $table->integer("vote");
             $table->string("discription");
             $table->unsignedBigInteger("restaurant_id");
             $table->timestamps();
+            $table->foreign("user_id")
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+                $table->foreign("restaurant_id")
+                ->references('id')
+                ->on('restaurants')
+                ->onDelete('cascade');
         });
     }
 

@@ -166,7 +166,9 @@ class RestaurantController extends Controller
         $result->isAddress->isCity;
         $result->isAddress->isDistrict;
         $result->isAddress->isWards;
-
+        foreach ($result->vote as $vote) {
+            $vote->isUser;
+        }
         return response()->json(["restaurant" => $result], 200);
     }
 
