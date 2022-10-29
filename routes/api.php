@@ -7,6 +7,8 @@ use App\Http\Controllers\Api\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Api\BlogController;
 use App\Http\Controllers\Api\EattingController;
 use App\Http\Controllers\Api\ImageController;
+use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\OrderDetailController;
 use App\Http\Controllers\Api\ProvincesController;
 use App\Http\Controllers\Api\RechargeController;
 use App\Http\Controllers\Api\RestaurantController;
@@ -83,6 +85,10 @@ Route::apiResource("/address", AddressController::class);
 Route::apiResource("/province", ProvincesController::class);
 
 Route::apiResource("/vote", VoteController::class)->middleware("auth:sanctum");
+
+Route::apiResource("/order", OrderController::class)->middleware("auth:sanctum");
+
+Route::apiResource("/order-detail", OrderDetailController::class)->middleware("auth:sanctum");
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::group(['prefix' => "recharge"], function(){

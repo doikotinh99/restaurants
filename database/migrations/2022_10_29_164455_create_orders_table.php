@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVotesTable extends Migration
+class CreateOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateVotesTable extends Migration
      */
     public function up()
     {
-        Schema::create('votes', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("user_id");
-            $table->integer("vote");
-            $table->string("discription");
             $table->unsignedBigInteger("restaurant_id");
+            $table->unsignedBigInteger("table_id");
+            $table->string("status");
             $table->timestamps();
             $table->foreign("user_id")
                 ->references('id')
@@ -27,6 +27,10 @@ class CreateVotesTable extends Migration
             $table->foreign("restaurant_id")
                 ->references('id')
                 ->on('restaurants')
+                ->onDelete('cascade');
+            $table->foreign("table_id")
+                ->references('id')
+                ->on('table_infos')
                 ->onDelete('cascade');
         });
     }
@@ -38,6 +42,6 @@ class CreateVotesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('votes');
+        Schema::dropIfExists('orders');
     }
 }
