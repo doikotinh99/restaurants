@@ -135,8 +135,8 @@ class OrderController extends Controller
         //
     }
 
-    public function cancel(Order $order){
-        $order->update([
+    public function cancel($id){
+        $order = Order::where("id", $id)->update([
             "status" => "false"
         ]);
         return $order;
