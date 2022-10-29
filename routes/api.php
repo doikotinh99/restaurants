@@ -87,6 +87,7 @@ Route::apiResource("/province", ProvincesController::class);
 Route::apiResource("/vote", VoteController::class)->middleware("auth:sanctum");
 
 Route::apiResource("/order", OrderController::class)->middleware("auth:sanctum");
+Route::apiResource("/order/cancel/{id}", [OrderController::class, "cancel"])->middleware("auth:sanctum");
 
 Route::apiResource("/order-detail", OrderDetailController::class)->middleware("auth:sanctum");
 

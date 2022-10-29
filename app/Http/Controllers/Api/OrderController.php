@@ -134,4 +134,11 @@ class OrderController extends Controller
     {
         //
     }
+
+    public function cancel(Order $order){
+        $order->update([
+            "status" => "false"
+        ]);
+        return $order;
+    }
 }
