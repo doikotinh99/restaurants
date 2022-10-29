@@ -908,10 +908,7 @@
                                     "order_id": {
                                         "type": "text"
                                     },
-                                    "eating_id": {
-                                        "type": "text"
-                                    },
-                                    "quanlity": {
+                                    "eats": {
                                         "type": "text"
                                     }
                                 },

@@ -47,11 +47,7 @@ class OrderDetailController extends Controller
      *                  type="text"
      *               ),
      *              @OA\Property(
-     *                  property="eating_id",
-     *                  type="text"
-     *               ),
-     *              @OA\Property(
-     *                  property="quanlity",
+     *                  property="eats",
      *                  type="text"
      *               )
      *           )
@@ -66,11 +62,16 @@ class OrderDetailController extends Controller
      */
     public function store(Request $request)
     {
-        $order = OrderDetail::create([
-            "order_id" => $request->order_id,
-            "eating_id" => $request->eating_id,
-            "quanlity" => $request->quanlity
-        ]);
+        $eats = $request->eats;
+        $eats = json_decode($eats);
+        foreach($eats as $eat){
+            $order = OrderDetail::create([
+                "order_id" => $request->order_id,
+                "eating_id" => $eat->id,
+                "quanlity" => $eat->quanlity
+            ]);
+        }
+        
         return $order;
     }
 
