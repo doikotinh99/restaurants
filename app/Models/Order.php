@@ -12,6 +12,7 @@ class Order extends Model
         "user_id",
         "restaurant_id",
         "table_id",
+        "arrival_time",
         "status"
     ];
 

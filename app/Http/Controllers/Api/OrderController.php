@@ -72,7 +72,8 @@ class OrderController extends Controller
             "user_id" => $request->user()->id,
             "restaurant_id" => $request->restaurant_id,
             "table_id" => $request->table_id,
-            "status" => 0
+            "status" => 0,
+            "arrival_time" => $request->arrival_time
         ]);
         return $order;
     }
