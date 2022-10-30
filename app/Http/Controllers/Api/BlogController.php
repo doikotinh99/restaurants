@@ -40,6 +40,7 @@ class BlogController extends Controller
             foreach ($val->comments as $cmt) {
                 $cmt->repComment;
             }
+            $val->images;
             $val->user;
         }
 
@@ -103,7 +104,7 @@ class BlogController extends Controller
                 $result->images()->save($image);
             }
         }
-        return response()->json(["blog" => $result], 200);
+        return $result;
     }
 
     /**
@@ -131,7 +132,8 @@ class BlogController extends Controller
     public function show(Blog $blog)
     {
         $blog->comments;
-        return response()->json(["blog" => $blog], 200);
+        $blog->images;
+        return $blog;
     }
 
     /**
@@ -173,7 +175,7 @@ class BlogController extends Controller
         $result = $blog->update([
             "content" => $request->content
         ]);
-        return response()->json(["blog" => $result], 200);
+        return $result;
     }
 
     /**
@@ -245,7 +247,7 @@ class BlogController extends Controller
             "content" => $request->content,
         ]);
         $result = $blog->comments()->save($cmt);
-        return response()->json(["cmt" => $result], 200);
+        return $result;
     }
     /**
      * @OA\Post(
@@ -285,6 +287,6 @@ class BlogController extends Controller
             "content" => $request->content,
         ]);
         $result = $cmt->repComment()->save($repCmt);
-        return response()->json(["cmt" => $result], 200);
+        return $result;
     }
 }
