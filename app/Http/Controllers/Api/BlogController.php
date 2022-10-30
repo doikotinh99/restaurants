@@ -63,6 +63,10 @@ class BlogController extends Controller
      *                  type="text"
      *               ),
      *               @OA\Property(
+     *                  property="title",
+     *                  type="text"
+     *               ),
+     *               @OA\Property(
      *                  property="image[]",
      *                  type="array",
      *                  @OA\Items(
@@ -86,6 +90,7 @@ class BlogController extends Controller
         $result = Blog::create([
             "user_id" => $request->user()->id,
             "content" => $request->content,
+            "title" => $request->title,
             "status" => 1
         ]);
 
@@ -99,7 +104,7 @@ class BlogController extends Controller
                 $fileName = 'blog-' . time() . '.' . $ext;
                 $file->move(public_path("images/blogs"), $fileName);
                 $image = new Image([
-                    "path" => "images/blogs/" . $fileName
+                    "path" => "blogs/" . $fileName
                 ]);
                 $result->images()->save($image);
             }

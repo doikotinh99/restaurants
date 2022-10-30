@@ -394,6 +394,9 @@
                                     "content": {
                                         "type": "text"
                                     },
+                                    "title": {
+                                        "type": "text"
+                                    },
                                     "image[]": {
                                         "type": "array",
                                         "items": {
