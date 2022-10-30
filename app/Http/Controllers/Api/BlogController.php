@@ -143,6 +143,7 @@ class BlogController extends Controller
     {
         $blog->comments;
         $blog->images;
+        $blog->user;
         return $blog;
     }
 
