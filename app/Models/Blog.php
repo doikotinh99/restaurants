@@ -12,6 +12,7 @@ class Blog extends Model
         "user_id",
         "content",
         "title",
+        "description",
         "status"
     ];
 

@@ -66,6 +66,10 @@ class BlogController extends Controller
      *                  property="title",
      *                  type="text"
      *               ),
+     *              @OA\Property(
+     *                  property="description",
+     *                  type="text"
+     *               ),
      *               @OA\Property(
      *                  property="image[]",
      *                  type="array",
@@ -91,6 +95,7 @@ class BlogController extends Controller
             "user_id" => $request->user()->id,
             "content" => $request->content,
             "title" => $request->title,
+            "description" => $request->description,
             "status" => 1
         ]);
 
