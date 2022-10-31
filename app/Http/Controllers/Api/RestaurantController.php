@@ -296,31 +296,32 @@ class RestaurantController extends Controller
 
     public function restaurantUser()
     {
-        $result = Restaurant::where("user_id", Auth::user()->id)->first();
-        $result->user;
-
-        foreach ($result->tables as $tables) {
+        $result = Restaurant::where("user_id", Auth::user()->id)->get();
+        foreach($result as $val){
+            $val->user;
+        foreach ($val->tables as $tables) {
             $tables->images;
         }
-        foreach ($result->menu as $eacting) {
+        foreach ($val->menu as $eacting) {
             $eacting->images;
         }
-        $result->images;
-        $result->isAddress->isCity;
-        $result->isAddress->isDistrict;
-        $result->isAddress->isWards;
+        $val->images;
+        $val->isAddress->isCity;
+        $val->isAddress->isDistrict;
+        $val->isAddress->isWards;
 
-        foreach ($result->vote as $vote) {
+        foreach ($val->vote as $vote) {
             $vote->isUser;
         }
 
-        foreach ($result->order as $order) {
+        foreach ($val->order as $order) {
             foreach ($order->orderDetail as $val) {
                 $val->eating;
             }
             $order->user;
             $order->restaurant;
             $order->table;
+        }
         }
         return $result;
     }
