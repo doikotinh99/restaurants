@@ -268,4 +268,17 @@ class EattingController extends Controller
 
         return $result;
     }
+
+    public function eatingforres($id)
+    {
+        //
+        $result = Eating::where("restaurant_id", $id)->get();
+
+        foreach ($result as $val) {
+            $val->images;
+            $val->restaurant;
+        }
+
+        return response()->json(["eatting" => $result], 200);
+    }
 }

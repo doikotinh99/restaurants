@@ -76,6 +76,7 @@ Route::get("/my-restaurant", [RestaurantController::class, "restaurantUser"])->m
 Route::get("/eating/top-discount", [EattingController::class, "topDiscount"]);
 Route::apiResource("/eating", EattingController::class, ["only" => ["index"]]);
 Route::apiResource("/eating", EattingController::class, ["except" => ["index", "topDiscount"]])->middleware("auth:sanctum");
+Route::get("/eating/ofres/{id}", EattingController::class)->middleware("auth:sanctum");
 Route::post("/eating/update", [EattingController::class, "update"])->middleware("auth:sanctum");
 
 
