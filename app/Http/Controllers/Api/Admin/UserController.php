@@ -217,7 +217,7 @@ class UserController extends Controller
     public function setUser($id)
     {
         if(Auth::user()->role !== 1) response()->json(["msg" => "false"], 403);
-        $status = User::where("id", $id)->update(["status" => 0]);
+        $status = User::where("id", $id)->update(["role" => 0]);
         if($status) return response()->json(["msg" => "true", "user" => "User"], 200);
         return response()->json(["msg" => "false", "user" => $id], 201);
     }
