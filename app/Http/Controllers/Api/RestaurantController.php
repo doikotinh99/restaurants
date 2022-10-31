@@ -29,7 +29,7 @@ class RestaurantController extends Controller
         $result = Restaurant::all();
 
         foreach ($result as $val) {
-            $val->user;
+            $val->user->info;
 
             foreach ($val->tables as $tables) {
                 $tables->images;
