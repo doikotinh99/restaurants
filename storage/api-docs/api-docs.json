@@ -367,6 +367,68 @@
                 ]
             }
         },
+        "/api/admin/user/set-vendor/{id}": {
+            "post": {
+                "tags": [
+                    "Account"
+                ],
+                "summary": "Active user",
+                "description": "set vendor",
+                "operationId": "setVendor",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "user id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/admin/user/set-user/{id}": {
+            "post": {
+                "tags": [
+                    "Account"
+                ],
+                "summary": "set user",
+                "description": "set user",
+                "operationId": "setUser",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "user id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
         "/api/blog": {
             "get": {
                 "tags": [

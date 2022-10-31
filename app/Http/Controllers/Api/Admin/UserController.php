@@ -161,4 +161,64 @@ class UserController extends Controller
         return response()->json(["msg" => "false", "user" => $id], 201);
     }
 
+    /**
+     * @OA\Post(
+     *     path="/api/admin/user/set-vendor/{id}",
+     *     operationId="setVendor",
+     *     tags={"Account"},
+     *     summary="Active user",
+     *     description="set vendor",
+     *     @OA\Parameter(
+     *         name="id",
+     *         description="user id",
+     *         required=true,
+     *         in="path",
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Successful operation",
+     *     ),
+     *      security={{"bearer":{}}},
+     *)
+     */
+    public function setVendor($id)
+    {
+        if(Auth::user()->role !== 1) response()->json(["msg" => "false"], 403);
+        $status = User::where("id", $id)->update(["role" => 2]);
+        if($status) return response()->json(["msg" => "true", "user" => "vendor"], 200);
+        return response()->json(["msg" => "false", "user" => $id], 201);
+    }
+    /**
+     * @OA\Post(
+     *     path="/api/admin/user/set-user/{id}",
+     *     operationId="setUser",
+     *     tags={"Account"},
+     *     summary="set user",
+     *     description="set user",
+     *     @OA\Parameter(
+     *         name="id",
+     *         description="user id",
+     *         required=true,
+     *         in="path",
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Successful operation",
+     *     ),
+     *      security={{"bearer":{}}},
+     *)
+     */
+    public function setUser($id)
+    {
+        if(Auth::user()->role !== 1) response()->json(["msg" => "false"], 403);
+        $status = User::where("id", $id)->update(["status" => 0]);
+        if($status) return response()->json(["msg" => "true", "user" => "User"], 200);
+        return response()->json(["msg" => "false", "user" => $id], 201);
+    }
 }

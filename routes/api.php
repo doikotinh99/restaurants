@@ -40,6 +40,8 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
         Route::apiResource("user", AdminUserController::class);
         Route::post("user/band/{id}", [AdminUserController::class, "band"]);
         Route::post("user/active/{id}", [AdminUserController::class, "active"]);
+        Route::post("user/set-user/{id}", [AdminUserController::class, "setUser"]);
+        Route::post("user/set-vendor/{id}", [AdminUserController::class, "setVendor"]);
         Route::post("/blog/status/{blog}", [AdminBlogController::class, "status"]);
         Route::apiResource("/restaurant", AdminRestaurantController::class);
     });
