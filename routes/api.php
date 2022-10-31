@@ -71,6 +71,7 @@ Route::post("blog/images", [BlogController::class, "pushImages"]);
 Route::apiResource("/restaurant", RestaurantController::class, ["only" => ["show", "index"]]);
 Route::apiResource("/restaurant", RestaurantController::class, ["except" => ["show", "index"]])->middleware("auth:sanctum");
 Route::post("/restaurant/update", [RestaurantController::class, "update"])->middleware("auth:sanctum");
+Route::get("/my-restaurant", [RestaurantController::class, "restaurantUser"])->middleware("auth:sanctum");
 
 Route::get("/eating/top-discount", [EattingController::class, "topDiscount"]);
 Route::apiResource("/eating", EattingController::class, ["only" => ["index"]]);

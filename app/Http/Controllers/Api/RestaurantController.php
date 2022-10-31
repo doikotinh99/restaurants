@@ -41,7 +41,7 @@ class RestaurantController extends Controller
             $val->isAddress->isCity;
             $val->isAddress->isDistrict;
             $val->isAddress->isWards;
-            
+
             foreach ($val->vote as $vote) {
                 $vote->isUser;
             }
@@ -108,7 +108,7 @@ class RestaurantController extends Controller
             "time_start" => $request->time_start,
             "time_end" => $request->time_end,
             "description" => $request->description,
-            "slug" => Str::slug($request->name, "-")."-".time()
+            "slug" => Str::slug($request->name, "-") . "-" . time()
         ]);
 
         if ($request->image) {
@@ -227,7 +227,7 @@ class RestaurantController extends Controller
      */
     public function update(Request $request)
     {
-        
+
         $restaurant = Restaurant::find($request->id)->first();
         if ($request->user()->id != $restaurant->user_id)
             return response()->json(["msg" => "false user"], 404);
@@ -237,7 +237,7 @@ class RestaurantController extends Controller
             "time_start" => $request->time_start,
             "time_end" => $request->time_end,
             "description" => $request->description,
-            "slug" => Str::slug($request->name, "-")."-".time()
+            "slug" => Str::slug($request->name, "-") . "-" . time()
         ]);
 
         if ($request->image) {
@@ -289,5 +289,36 @@ class RestaurantController extends Controller
         $restaurant->images()->delete();
         $restaurant->vote()->delete();
         return response()->json(["restaurant" => "deleted"], 200);
+    }
+
+    public function restaurantUser()
+    {
+        $result = Restaurant::where("user_id", Auth::user()->id)->first();
+        $result->user;
+
+        foreach ($result->tables as $tables) {
+            $tables->images;
+        }
+        foreach ($result->menu as $eacting) {
+            $eacting->images;
+        }
+        $result->images;
+        $result->isAddress->isCity;
+        $result->isAddress->isDistrict;
+        $result->isAddress->isWards;
+
+        foreach ($result->vote as $vote) {
+            $vote->isUser;
+        }
+
+        foreach ($result->order as $order) {
+            foreach ($order->orderDetail as $val) {
+                $val->eating;
+            }
+            $order->user;
+            $order->restaurant;
+            $order->table;
+        }
+        return $result;
     }
 }

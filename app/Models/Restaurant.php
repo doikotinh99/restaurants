@@ -41,4 +41,8 @@ class Restaurant extends Model
     public function vote(){
         return $this->hasMany(Vote::class);
     }
+
+    public function order(){
+        return $this->hasMany(Order::class);
+    }
 }
