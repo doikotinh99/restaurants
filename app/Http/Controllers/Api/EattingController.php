@@ -279,6 +279,6 @@ class EattingController extends Controller
             $val->restaurant;
         }
 
-        return response()->json(["eatting" => $result], 200);
+        return $result;
     }
 }
