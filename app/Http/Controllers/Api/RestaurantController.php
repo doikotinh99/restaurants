@@ -280,15 +280,18 @@ class RestaurantController extends Controller
      *     security={{"bearer":{}}},
      * )
      */
-    public function destroy(Restaurant $restaurant)
+    public function destroy($id)
     {
+        $restaurant = Restaurant::where("id", $id)->first();
+        // return $restaurant;
         $restaurant->delete();
         $restaurant->tables()->delete();
         $restaurant->menu()->delete();
-        $restaurant->address()->delete();
+        $restaurant->isAddress()->delete();
         $restaurant->images()->delete();
         $restaurant->vote()->delete();
-        return response()->json(["restaurant" => "deleted"], 200);
+        $restaurant->order()->delete();
+        return "deleted";
     }
 
     public function restaurantUser()
