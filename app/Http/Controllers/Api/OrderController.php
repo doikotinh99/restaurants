@@ -142,4 +142,18 @@ class OrderController extends Controller
         ]);
         return $order;
     }
+
+    public function active($id){
+        $order = Order::where("id", $id)->update([
+            "status" => "1"
+        ]);
+        return $order;
+    }
+
+    public function done($id){
+        $order = Order::where("id", $id)->update([
+            "status" => "2"
+        ]);
+        return $order;
+    }
 }

@@ -90,6 +90,8 @@ Route::apiResource("/vote", VoteController::class)->middleware("auth:sanctum");
 
 Route::apiResource("/order", OrderController::class)->middleware("auth:sanctum");
 Route::post("/order/cancel/{id}", [OrderController::class, "cancel"])->middleware("auth:sanctum");
+Route::post("/order/active/{id}", [OrderController::class, "active"])->middleware("auth:sanctum");
+Route::post("/order/done/{id}", [OrderController::class, "done"])->middleware("auth:sanctum");
 
 Route::apiResource("/order-detail", OrderDetailController::class)->middleware("auth:sanctum");
 
