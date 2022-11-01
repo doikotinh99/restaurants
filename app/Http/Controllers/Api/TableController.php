@@ -64,14 +64,6 @@ class TableController extends Controller
      *              @OA\Property(
      *                  property="description",
      *                  type="text"
-     *               ),
-     *               @OA\Property(
-     *                  property="image[]",
-     *                  type="array",
-     *                  @OA\Items(
-     *                       type="string",
-     *                       format="binary",
-     *                  ),
      *               )
      *           )
      *       )
@@ -96,24 +88,24 @@ class TableController extends Controller
             "status" => 1
         ]);
 
-        if ($request->image) {
-            $files = $request->image;
-            foreach ($files as $key => $file) {
-                // $images = $file->store("public/tables");
-                // // $filename = $images->name;
-                // $filename = explode("/", $images)[2];
-                // $image = new Image([
-                //     "path" => "tables/" . $filename
-                // ]);
-                $ext = $file->extension();
-                $fileName = 'tables-' . time() . '.' . $ext;
-                $file->move(public_path("images/tables"), $fileName);
-                $image = new Image([
-                    "path" => "tables/" . $fileName
-                ]);
-                $table->images()->save($image);
-            }
-        }
+        // if ($request->image) {
+        //     $files = $request->image;
+        //     foreach ($files as $key => $file) {
+        //         // $images = $file->store("public/tables");
+        //         // // $filename = $images->name;
+        //         // $filename = explode("/", $images)[2];
+        //         // $image = new Image([
+        //         //     "path" => "tables/" . $filename
+        //         // ]);
+        //         $ext = $file->extension();
+        //         $fileName = 'tables-' . time() . '.' . $ext;
+        //         $file->move(public_path("images/tables"), $fileName);
+        //         $image = new Image([
+        //             "path" => "tables/" . $fileName
+        //         ]);
+        //         $table->images()->save($image);
+        //     }
+        // }
         return response()->json(["tables" => $table], 200);
     }
 
@@ -179,14 +171,6 @@ class TableController extends Controller
      *              @OA\Property(
      *                  property="description",
      *                  type="text"
-     *               ),
-     *               @OA\Property(
-     *                  property="image[]",
-     *                  type="array",
-     *                  @OA\Items(
-     *                       type="string",
-     *                       format="binary",
-     *                  ),
      *               )
      *           )
      *       )
@@ -208,21 +192,21 @@ class TableController extends Controller
             "description" => $request->description
         ]);
 
-        if ($request->image) {
-            $files = $request->image;
-            foreach ($files as $key => $file) {
-                // $images = $file->store("public/tables");
-                // // $filename = $images->name;
-                // $filename = explode("/", $images)[2];
-                $ext = $file->extension();
-                $fileName = 'tables-' . time() . '.' . $ext;
-                $file->move(public_path("images/tables"), $fileName);
-                $image = new Image([
-                    "path" => "tables/" . $fileName
-                ]);
-                $tableInfo->images()->save($image);
-            }
-        }
+        // if ($request->image) {
+        //     $files = $request->image;
+        //     foreach ($files as $key => $file) {
+        //         // $images = $file->store("public/tables");
+        //         // // $filename = $images->name;
+        //         // $filename = explode("/", $images)[2];
+        //         $ext = $file->extension();
+        //         $fileName = 'tables-' . time() . '.' . $ext;
+        //         $file->move(public_path("images/tables"), $fileName);
+        //         $image = new Image([
+        //             "path" => "tables/" . $fileName
+        //         ]);
+        //         $tableInfo->images()->save($image);
+        //     }
+        // }
         return response()->json(["restaurant" => $result], 200);
     }
 
