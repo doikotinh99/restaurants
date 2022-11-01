@@ -82,6 +82,7 @@ Route::post("/eating/update", [EattingController::class, "update"])->middleware(
 
 Route::apiResource("/tableinfo", TableController::class)->middleware("auth:sanctum");
 Route::post("/tableinfo/update", [TableController::class, "update"])->middleware("auth:sanctum");
+Route::get("/tableinfo/ofres/{id}", [TableController::class, "tableforres"])->middleware("auth:sanctum");
 
 Route::delete("/image/{id}", [ImageController::class, "destroy"])->middleware("auth:sanctum");
 

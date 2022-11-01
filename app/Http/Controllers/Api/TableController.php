@@ -254,4 +254,17 @@ class TableController extends Controller
         $tableInfo->images()->delete();
         return response()->json(["tableInfo" => "deleted"], 200);
     }
+
+    public function Tableforres($id)
+    {
+        //
+        $result = TableInfo::where("restaurant_id", $id)->get();
+
+        foreach ($result as $val) {
+            $val->images;
+            $val->restaurant;
+        }
+
+        return $result;
+    }
 }
