@@ -160,12 +160,13 @@ class OrderController extends Controller
         return $order;
     }
 
-    public function orderforres(Request $request)
+    public function orderforres($id)
     {
-
-        $result = Order::where("restaurant_id", $request->id)
-            ->where("YEAR(`created_at`)", $request->year)
-            ->where("MONTH(`created_at`)", $request->month)
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+        $dS = date(DATE_ATOM,mktime(0,0,0,date("m") - 1,1,date("Y")));
+        $dE = date(DATE_ATOM,mktime(0,0,0,date("m") + 1,1,date("Y")));
+        $result = Order::where("restaurant_id", $id)
+            ->whereBetweenColumns("created_at", [$dS, $dE])
             ->get();
 
         foreach ($result as $val) {
