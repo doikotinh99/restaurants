@@ -25,7 +25,7 @@ class OrderController extends Controller
     {
         //
         $order = Order::all();
-        foreach($order as $vals){
+        foreach ($order as $vals) {
             foreach ($vals->orderDetail as $val) {
                 $val->eating;
             }
@@ -136,31 +136,37 @@ class OrderController extends Controller
         //
     }
 
-    public function cancel($id){
+    public function cancel($id)
+    {
         $order = Order::where("id", $id)->update([
             "status" => "false"
         ]);
         return $order;
     }
 
-    public function active($id){
+    public function active($id)
+    {
         $order = Order::where("id", $id)->update([
             "status" => "1"
         ]);
         return $order;
     }
 
-    public function done($id){
+    public function done($id)
+    {
         $order = Order::where("id", $id)->update([
             "status" => "2"
         ]);
         return $order;
     }
 
-    public function orderforres($id)
+    public function orderforres(Request $request)
     {
-        //
-        $result = Order::where("restaurant_id", $id)->get();
+
+        $result = Order::where("restaurant_id", $request->id)
+            ->where("YEAR(`created_at`)", $request->year)
+            ->where("MONTH(`created_at`)", $request->month)
+            ->get();
 
         foreach ($result as $val) {
             foreach ($result->orderDetail as $val) {
