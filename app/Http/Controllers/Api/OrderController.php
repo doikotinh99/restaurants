@@ -156,4 +156,22 @@ class OrderController extends Controller
         ]);
         return $order;
     }
+
+    public function orderforres($id)
+    {
+        //
+        $result = Order::where("restaurant_id", $id)->get();
+
+        foreach ($result as $val) {
+            foreach ($result->orderDetail as $val) {
+                $val->eating;
+            }
+            $result->user;
+            $result->restaurant;
+            $result->table;
+            return $result;
+        }
+
+        return $result;
+    }
 }
