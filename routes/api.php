@@ -92,7 +92,7 @@ Route::apiResource("/province", ProvincesController::class);
 Route::apiResource("/vote", VoteController::class)->middleware("auth:sanctum");
 
 Route::apiResource("/order", OrderController::class)->middleware("auth:sanctum");
-Route::get("/order/ofres/{id}", [OrderController::class, "orderforres"])->middleware("auth:sanctum");
+Route::post("/order/ofres", [OrderController::class, "orderforres"])->middleware("auth:sanctum");
 Route::post("/order/cancel/{id}", [OrderController::class, "cancel"])->middleware("auth:sanctum");
 Route::post("/order/active/{id}", [OrderController::class, "active"])->middleware("auth:sanctum");
 Route::post("/order/done/{id}", [OrderController::class, "done"])->middleware("auth:sanctum");
