@@ -170,15 +170,15 @@ class OrderController extends Controller
             ->whereDate('created_at', "<=" ,$dE)
             ->get();
 
-        foreach ($result as $val) {
-            foreach ($result->orderDetail as $val) {
-                $val->eating;
-            }
-            $result->user;
-            $result->restaurant;
-            $result->table;
-            return $result;
-        }
+        // foreach ($result as $val) {
+        //     foreach ($result->orderDetail as $val) {
+        //         $val->eating;
+        //     }
+        //     $result->user;
+        //     $result->restaurant;
+        //     $result->table;
+        //     return $result;
+        // }
 
         return $result;
     }
