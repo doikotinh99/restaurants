@@ -163,8 +163,8 @@ class OrderController extends Controller
     public function orderforres($id)
     {
         date_default_timezone_set('Asia/Ho_Chi_Minh');
-        $dS = date("Y-m-d",mktime(0,0,0,date("m") - 1,1,date("Y")));
-        $dE = date("Y-m-d",mktime(23,59,59,date("m") + 1,1,date("Y")));
+        $dS = date("Y-m-d H:i:s",mktime(0,0,0,date("m") - 1,1,date("Y")));
+        $dE = date("Y-m-d H:i:s",mktime(23,59,59,date("m") + 1,1,date("Y")));
         $result = Order::where("restaurant_id", $id)
             ->whereBetweenColumns("created_at", [$dS, $dE])
             ->get();
