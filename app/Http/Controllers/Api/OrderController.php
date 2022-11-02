@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\Restaurant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -161,8 +163,10 @@ class OrderController extends Controller
         return $order;
     }
 
-    public function orderforres($id)
+    public function orderforres()
     {
+        $restaurant = Restaurant::where("user_id", Auth::user()->id)->first();
+        $id = $restaurant->id;
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $dS = date("Y-m-d", mktime(0, 0, 0, date("m"), 1, date("Y")));
         $dE = date("Y-m-d", mktime(23, 59, 59, date("m") + 1, 1 - 1, date("Y")));
