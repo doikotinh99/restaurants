@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -169,13 +170,28 @@ class OrderController extends Controller
             ->whereDate('created_at', ">=", $dS)
             ->whereDate('created_at', "<=", $dE)
             ->get();
-
+        for ($i = 0; $i < count($result); $i++) {
+            $order_detail = OrderDetail::where("order_id", $result[$i]->id)->get();
+            $sum = 0;
+            foreach ($order_detail as $od) {
+                $sum += $od->quanlity * $od->eating->price;
+            }
+            $result[$i]->sum = $sum;
+        }
         $dS1 = date("Y-m-d", mktime(0, 0, 0, date("m") - 1, 1, date("Y")));
         $dE1 = date("Y-m-d", mktime(23, 59, 59, date("m"), 1 - 1, date("Y")));
         $result1 = Order::where("restaurant_id", $id)
             ->whereDate('created_at', ">=", $dS1)
             ->whereDate('created_at', "<=", $dE1)
             ->get();
+        for ($i = 0; $i < count($result1); $i++) {
+            $order_detail = OrderDetail::where("order_id", $result1[$i]->id)->get();
+            $sum = 0;
+            foreach ($order_detail as $od) {
+                $sum += $od->quanlity * $od->eating->price;
+            }
+            $result1[$i]->sum = $sum;
+        }
         $arr = ["old" => $result, "now" => $result1];
         // foreach ($result as $val) {
         //     foreach ($result->orderDetail as $val) {
