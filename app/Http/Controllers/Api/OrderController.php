@@ -176,7 +176,7 @@ class OrderController extends Controller
             ->whereDate('created_at', ">=", $dS1)
             ->whereDate('created_at', "<=", $dE1)
             ->get();
-        $arr = [$result, $result1];
+        $arr = ["old" => $result, "now" => $result1];
         // foreach ($result as $val) {
         //     foreach ($result->orderDetail as $val) {
         //         $val->eating;
