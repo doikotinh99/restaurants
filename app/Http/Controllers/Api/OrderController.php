@@ -163,13 +163,20 @@ class OrderController extends Controller
     public function orderforres($id)
     {
         date_default_timezone_set('Asia/Ho_Chi_Minh');
-        $dS = date("Y-m-d",mktime(0,0,0,date("m") - 1,1,date("Y")));
-        $dE = date("Y-m-d",mktime(23,59,59,date("m") + 1,1,date("Y")));
+        $dS = date("Y-m-d", mktime(0, 0, 0, date("m"), 1, date("Y")));
+        $dE = date("Y-m-d", mktime(23, 59, 59, date("m") + 1, 1 - 1, date("Y")));
         $result = Order::where("restaurant_id", $id)
-            ->whereDate('created_at', ">=" ,$dS)
-            ->whereDate('created_at', "<=" ,$dE)
+            ->whereDate('created_at', ">=", $dS)
+            ->whereDate('created_at', "<=", $dE)
             ->get();
 
+        $dS1 = date("Y-m-d", mktime(0, 0, 0, date("m") - 1, 1, date("Y")));
+        $dE1 = date("Y-m-d", mktime(23, 59, 59, date("m"), 1 - 1, date("Y")));
+        $result1 = Order::where("restaurant_id", $id)
+            ->whereDate('created_at', ">=", $dS1)
+            ->whereDate('created_at', "<=", $dE1)
+            ->get();
+        $arr = [$result, $result1];
         // foreach ($result as $val) {
         //     foreach ($result->orderDetail as $val) {
         //         $val->eating;
@@ -180,6 +187,6 @@ class OrderController extends Controller
         //     return $result;
         // }
 
-        return $result;
+        return $arr;
     }
 }
