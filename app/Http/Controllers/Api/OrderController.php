@@ -8,6 +8,7 @@ use App\Models\OrderDetail;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -209,4 +210,10 @@ class OrderController extends Controller
 
         return $arr;
     }
+
+    public function test(){
+        return  DB::table("order_by_date_v") -> get();
+    }
+
+
 }
