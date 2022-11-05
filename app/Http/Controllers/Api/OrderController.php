@@ -212,7 +212,7 @@ class OrderController extends Controller
     }
 
     public function test(){
-        return  DB::table("order_by_date_v") -> get();
+        return  DB::table("order_by_date_v") -> where("date", "11-2022") -> get();
     }
 
 
