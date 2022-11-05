@@ -212,7 +212,8 @@ class OrderController extends Controller
     }
 
     public function order_by_date_v($date){
-        return  DB::table("order_by_date_v") -> get();
+        return  DB::table("order_by_date_v") -> where("date", $date) -> get();
+        
     }
 
 
