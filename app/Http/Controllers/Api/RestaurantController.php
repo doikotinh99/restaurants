@@ -45,6 +45,14 @@ class RestaurantController extends Controller
             foreach ($val->vote as $vote) {
                 $vote->isUser;
             }
+            foreach ($val->order as $order) {
+                foreach ($order->orderDetail as $val) {
+                    $val->eating;
+                }
+                $order->user;
+                $order->restaurant;
+                $order->table;
+            }
         }
 
         return response()->json(["restaurant" => $result], 200);
@@ -297,31 +305,31 @@ class RestaurantController extends Controller
     public function restaurantUser()
     {
         $result = Restaurant::where("user_id", Auth::user()->id)->get();
-        foreach($result as $val){
+        foreach ($result as $val) {
             $val->user;
-        foreach ($val->tables as $tables) {
-            $tables->images;
-        }
-        foreach ($val->menu as $eacting) {
-            $eacting->images;
-        }
-        $val->images;
-        $val->isAddress->isCity;
-        $val->isAddress->isDistrict;
-        $val->isAddress->isWards;
-
-        foreach ($val->vote as $vote) {
-            $vote->isUser;
-        }
-
-        foreach ($val->order as $order) {
-            foreach ($order->orderDetail as $val) {
-                $val->eating;
+            foreach ($val->tables as $tables) {
+                $tables->images;
             }
-            $order->user;
-            $order->restaurant;
-            $order->table;
-        }
+            foreach ($val->menu as $eacting) {
+                $eacting->images;
+            }
+            $val->images;
+            $val->isAddress->isCity;
+            $val->isAddress->isDistrict;
+            $val->isAddress->isWards;
+
+            foreach ($val->vote as $vote) {
+                $vote->isUser;
+            }
+
+            foreach ($val->order as $order) {
+                foreach ($order->orderDetail as $val) {
+                    $val->eating;
+                }
+                $order->user;
+                $order->restaurant;
+                $order->table;
+            }
         }
         return $result;
     }

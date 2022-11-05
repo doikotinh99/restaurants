@@ -196,7 +196,7 @@ class OrderController extends Controller
             }
             $result1[$i]->sum = $sum;
         }
-        $arr = ["old" => $result, "now" => $result1];
+        $arr = ["now" => $result, "old" => $result1];
         // foreach ($result as $val) {
         //     foreach ($result->orderDetail as $val) {
         //         $val->eating;
