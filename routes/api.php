@@ -36,7 +36,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::middleware(['auth:sanctum', 'admin'])->group(function () {
-    Route::group(['prefix' => "admin"], function(){
+    Route::group(['prefix' => "admin"], function () {
         Route::apiResource("user", AdminUserController::class);
         Route::post("user/band/{id}", [AdminUserController::class, "band"]);
         Route::post("user/active/{id}", [AdminUserController::class, "active"]);
@@ -44,6 +44,7 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
         Route::post("user/set-vendor/{id}", [AdminUserController::class, "setVendor"]);
         Route::post("/blog/status/{blog}", [AdminBlogController::class, "status"]);
         Route::apiResource("/restaurant", AdminRestaurantController::class);
+        Route::get("/order-by-date/{date}", [OrderController::class, "order_by_date_v"]);
     });
 });
 
@@ -52,7 +53,7 @@ Route::apiResource("user", UserController::class)->middleware('auth:sanctum');
 Route::post("login", [UserController::class, "login"]);
 Route::post("register", [UserController::class, "register"]);
 Route::get("logout", [UserController::class, "logout"])->middleware('auth:sanctum');
-Route::get("403", function(){
+Route::get("403", function () {
     return response()->json(["msg" => "login"], 403);
 })->name("403");
 
@@ -99,13 +100,11 @@ Route::post("/order/done/{id}", [OrderController::class, "done"])->middleware("a
 
 Route::apiResource("/order-detail", OrderDetailController::class)->middleware("auth:sanctum");
 
-Route::get("/test-db", [OrderController::class, "test"]);
 
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::group(['prefix' => "recharge"], function(){
+    Route::group(['prefix' => "recharge"], function () {
         Route::get("/", [RechargeController::class, "getAll"]);
         Route::post("momo-qr", [RechargeController::class, "momoQR"]);
         Route::get("check", [RechargeController::class, "check"]);
     });
 });
-
