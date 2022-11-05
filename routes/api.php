@@ -99,6 +99,8 @@ Route::post("/order/done/{id}", [OrderController::class, "done"])->middleware("a
 
 Route::apiResource("/order-detail", OrderDetailController::class)->middleware("auth:sanctum");
 
+Route::get("/test-db", [OrderController::class, "test"]);
+
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::group(['prefix' => "recharge"], function(){
         Route::get("/", [RechargeController::class, "getAll"]);
