@@ -335,8 +335,10 @@ class RestaurantController extends Controller
         return $result;
     }
 
-    public function search(){
-        $search = DB::table("searchs")->get();
+    public function search($key)
+    {
+
+        $search = DB::table("searchs")->where("name", "like", "%" . $key . "%")->get();
 
         return $search;
     }
