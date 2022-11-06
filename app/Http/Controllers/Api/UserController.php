@@ -45,8 +45,7 @@ class UserController extends Controller
     public function index()
     {
         $user = Auth::user();
-        foreach($user as $val)
-            $user->infor;
+        $user->infor;
         return $user;
     }
 
