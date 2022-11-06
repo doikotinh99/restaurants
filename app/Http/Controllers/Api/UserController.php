@@ -45,7 +45,10 @@ class UserController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $user->infor;
+        $user->info->isAddress->isCity;
+        $user->info->isAddress->isDistrict;
+        $user->info->isAddress->isWards;
+        
         return $user;
     }
 
