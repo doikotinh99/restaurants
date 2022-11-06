@@ -7,6 +7,7 @@ use App\Models\Image;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class RestaurantController extends Controller
@@ -332,5 +333,11 @@ class RestaurantController extends Controller
             }
         }
         return $result;
+    }
+
+    public function search(){
+        $search = DB::table("searchs")->get();
+
+        return $search;
     }
 }
