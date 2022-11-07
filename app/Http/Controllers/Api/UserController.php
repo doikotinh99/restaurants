@@ -124,7 +124,7 @@ class UserController extends Controller
         // return $request->all();
         //
         $user = $request->user();
-        $check = $this->checkInfor($user->info);
+        $check = $this->checkInfor($user->id);
             if (!$check) {
                 if ($request->phone) UserInfor::where("user_id", $user->id)->update(["phone" => $request->phone]);;
                 if ($request->address) UserInfor::where("user_id", $user->id)->update(["address" => $request->address]);;
@@ -174,7 +174,6 @@ class UserController extends Controller
     public function logout()
     {
         Auth::user()->currentAccessToken()->delete();
-        
         return response()->json(["msg" => "logout"], 200);
     }
 
