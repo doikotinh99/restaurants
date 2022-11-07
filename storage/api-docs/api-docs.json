@@ -1504,7 +1504,9 @@
                         "bearer": []
                     }
                 ]
-            },
+            }
+        },
+        "/api/user/{action}": {
             "put": {
                 "tags": [
                     "Account"
@@ -1513,6 +1515,15 @@
                 "description": "Edit user",
                 "operationId": "EditUser",
                 "parameters": [
+                    {
+                        "name": "action",
+                        "in": "path",
+                        "description": "action",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
                     {
                         "name": "phone",
                         "in": "query",
