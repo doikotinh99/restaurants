@@ -68,23 +68,17 @@ class UserController extends Controller
     {
         return response()->json(["msg" => "false method"], 404);
     }
-
+    public function update(Request $request)
+    {
+        return response()->json(["msg" => "false method"], 404);
+    }
     /**
-     * @OA\Put(
-     *     path="/api/user/{action}",
+     * @OA\Post(
+     *     path="/api/user-info",
      *     operationId="EditUser",
      *     tags={"Account"},
      *     summary="Edit user",
      *     description="Edit user",
-     *     @OA\Parameter(
-     *         name="action",
-     *         description="action",
-     *         required=false,
-     *         in="path",
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
      *     @OA\Parameter(
      *         name="phone",
      *         description="Phone number",
@@ -128,7 +122,7 @@ class UserController extends Controller
      *      security={{"bearer":{}}},
      *)
      */
-    public function update(Request $request, $action)
+    public function info(Request $request)
     {
         return $request->all();
         //
@@ -153,7 +147,6 @@ class UserController extends Controller
         ]);
         return $result;
     }
-
     public function checkInfor($id)
     {
         $result = UserInfor::where("user_id", $id)->first();

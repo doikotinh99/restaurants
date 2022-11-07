@@ -50,6 +50,7 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
 
 
 Route::apiResource("user", UserController::class)->middleware('auth:sanctum');
+Route::post("user-info", [UserController::class, "info"])->middleware('auth:sanctum');
 Route::post("login", [UserController::class, "login"]);
 Route::post("register", [UserController::class, "register"]);
 Route::get("logout", [UserController::class, "logout"])->middleware('auth:sanctum');
