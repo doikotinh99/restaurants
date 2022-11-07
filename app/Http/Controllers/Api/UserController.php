@@ -128,7 +128,7 @@ class UserController extends Controller
         if (!$check) {
             if ($request->phone) UserInfor::where("user_id", $user->id)->update(["phone" => $request->phone]);;
             if ($request->address) UserInfor::where("user_id", $user->id)->update(["address" => $request->address]);;
-            if ($request->gender) UserInfor::where("user_id", $user->id)->update(["phogenderne" => $request->gender]);;
+            if ($request->gender) UserInfor::where("user_id", $user->id)->update(["gender" => $request->gender]);;
             if ($request->birday) UserInfor::where("user_id", $user->id)->update(["birday" => $request->birday]);;
             $infor = UserInfor::where("user_id", $user->info)->first();
             return $infor;
