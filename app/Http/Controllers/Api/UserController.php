@@ -61,7 +61,7 @@ class UserController extends Controller
             ->update([
                 "name" => $request->name
             ]);
-            return $user
+            return $user;
     }
 
     public function show($id)
