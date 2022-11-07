@@ -61,7 +61,7 @@ class UserController extends Controller
             ->update([
                 "name" => $request->name
             ]);
-            return $user;
+        return $user;
     }
 
     public function show($id)
@@ -125,27 +125,27 @@ class UserController extends Controller
         //
         $user = $request->user();
         $check = $this->checkInfor($user->id);
-            if (!$check) {
-                if ($request->phone) UserInfor::where("user_id", $user->id)->update(["phone" => $request->phone]);;
-                if ($request->address) UserInfor::where("user_id", $user->id)->update(["address" => $request->address]);;
-                if ($request->gender) UserInfor::where("user_id", $user->id)->update(["phogenderne" => $request->gender]);;
-                if ($request->birday) UserInfor::where("user_id", $user->id)->update(["birday" => $request->birday]);;
-                $infor = UserInfor::where("user_id", $user->info)->first();
-                return $infor;
-            }
-            $result = UserInfor::create([
-                "user_id" => $user->id,
-                "phone" => $request->phone,
-                "address" => $request->address,
-                "gender" => $request->gender,
-                "birday" => $request->birday
-            ]);
-            return $result;
+        if (!$check) {
+            if ($request->phone) UserInfor::where("user_id", $user->id)->update(["phone" => $request->phone]);;
+            if ($request->address) UserInfor::where("user_id", $user->id)->update(["address" => $request->address]);;
+            if ($request->gender) UserInfor::where("user_id", $user->id)->update(["phogenderne" => $request->gender]);;
+            if ($request->birday) UserInfor::where("user_id", $user->id)->update(["birday" => $request->birday]);;
+            $infor = UserInfor::where("user_id", $user->info)->first();
+            return $infor;
+        }
+        $result = UserInfor::create([
+            "user_id" => $user->id,
+            "phone" => $request->phone,
+            "address" => $request->address,
+            "gender" => $request->gender,
+            "birday" => $request->birday
+        ]);
+        return $result;
     }
 
     public function checkInfor($id)
     {
-        $result = UserInfor::where("id", $id)->first();
+        $result = UserInfor::where("user_id", $id)->first();
         if ($result !== null) {
             return false;
         }
