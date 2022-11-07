@@ -221,4 +221,6 @@ class UserController extends Controller
         if($status) return response()->json(["msg" => "true", "user" => "User"], 200);
         return response()->json(["msg" => "false", "user" => $id], 201);
     }
+
+    
 }

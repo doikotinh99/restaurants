@@ -287,4 +287,24 @@ class UserController extends Controller
         }
         return false;
     }
+
+    /**
+     * @OA\Post(
+     *     path="/api/user-vendor",
+     *     operationId="RequestVendor",
+     *     tags={"Account"},
+     *     summary="request is vendor",
+     *     description="request is vendor",
+     *     @OA\Response(
+     *         response=201,
+     *         description="Successful operation",
+     *     ),
+     *      security={{"bearer":{}}},
+     *)
+     */
+    public function vendor()
+    {
+        $status = User::where("id", Auth::user()->id)->update(["role" => 3]);
+        return $status;
+    }
 }

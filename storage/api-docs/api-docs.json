@@ -1654,6 +1654,26 @@
                 }
             }
         },
+        "/api/user-vendor": {
+            "post": {
+                "tags": [
+                    "Account"
+                ],
+                "summary": "request is vendor",
+                "description": "request is vendor",
+                "operationId": "RequestVendor",
+                "responses": {
+                    "201": {
+                        "description": "Successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
         "/api/vote": {
             "get": {
                 "tags": [
