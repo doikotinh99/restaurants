@@ -124,7 +124,7 @@ class UserController extends Controller
      */
     public function info(Request $request)
     {
-        return $request->all();
+        // return $request->all();
         //
         $user = $request->user();
         $check = $this->checkInfor($user->id);
