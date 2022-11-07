@@ -71,20 +71,11 @@ class UserController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/api/user/{id}",
+     *     path="/api/user",
      *     operationId="EditUser",
      *     tags={"Account"},
      *     summary="Edit user",
      *     description="Edit user",
-     *     @OA\Parameter(
-     *         name="id",
-     *         description="user id",
-     *         required=true,
-     *         in="path",
-     *         @OA\Schema(
-     *             type="integer"
-     *         )
-     *     ),
      *     @OA\Parameter(
      *         name="phone",
      *         description="Phone number",
@@ -128,32 +119,28 @@ class UserController extends Controller
      *      security={{"bearer":{}}},
      *)
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         // return $request->all();
         //
         $user = $request->user();
-        if ($id == $user->id) {
-            $check = $this->checkInfor($user->info);
+        $check = $this->checkInfor($user->info);
             if (!$check) {
-
-                if ($request->phone) UserInfor::where("id", $user->info)->update(["phone" => $request->phone]);;
-                if ($request->address) UserInfor::where("id", $user->info)->update(["address" => $request->address]);;
-                if ($request->gender) UserInfor::where("id", $user->info)->update(["phogenderne" => $request->gender]);;
-                if ($request->birday) UserInfor::where("id", $user->info)->update(["birday" => $request->birday]);;
+                if ($request->phone) UserInfor::where("user_id", $user->id)->update(["phone" => $request->phone]);;
+                if ($request->address) UserInfor::where("user_id", $user->id)->update(["address" => $request->address]);;
+                if ($request->gender) UserInfor::where("user_id", $user->id)->update(["phogenderne" => $request->gender]);;
+                if ($request->birday) UserInfor::where("user_id", $user->id)->update(["birday" => $request->birday]);;
                 $infor = UserInfor::where("user_id", $user->info)->first();
-                return response()->json(["user_info" => $infor], 200);
+                return $infor;
             }
             $result = UserInfor::create([
-                "user_id" => Auth::user()->id,
+                "user_id" => $user->id,
                 "phone" => $request->phone,
                 "address" => $request->address,
                 "gender" => $request->gender,
                 "birday" => $request->birday
             ]);
-            return response()->json(["user_info" => $result], 200);
-        }
-        return response()->json(["msg" => "login"], 403);
+            return $result;
     }
 
     public function checkInfor($id)
@@ -187,6 +174,7 @@ class UserController extends Controller
     public function logout()
     {
         Auth::user()->currentAccessToken()->delete();
+        
         return response()->json(["msg" => "logout"], 200);
     }
 

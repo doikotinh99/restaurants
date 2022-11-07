@@ -1365,13 +1365,6 @@
                                     },
                                     "description": {
                                         "type": "text"
-                                    },
-                                    "image[]": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "string",
-                                            "format": "binary"
-                                        }
                                     }
                                 },
                                 "type": "object"
@@ -1475,13 +1468,6 @@
                                     },
                                     "description": {
                                         "type": "text"
-                                    },
-                                    "image[]": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "string",
-                                            "format": "binary"
-                                        }
                                     }
                                 },
                                 "type": "object"
@@ -1529,15 +1515,6 @@
                 "description": "Edit user",
                 "operationId": "EditUser",
                 "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "user id",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    },
                     {
                         "name": "phone",
                         "in": "query",
