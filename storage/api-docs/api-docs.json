@@ -1504,9 +1504,7 @@
                         "bearer": []
                     }
                 ]
-            }
-        },
-        "/api/user/{id}": {
+            },
             "put": {
                 "tags": [
                     "Account"
