@@ -130,7 +130,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $action)
     {
-        // return $request->all();
+        return $request->all();
         //
         $user = $request->user();
         $check = $this->checkInfor($user->id);
