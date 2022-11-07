@@ -57,7 +57,11 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        return response()->json(["msg" => "false method"], 404);
+        $user = User::where("id", $request->user()->id)
+            ->update([
+                "name" => $request->name
+            ]);
+            return $user
     }
 
     public function show($id)
