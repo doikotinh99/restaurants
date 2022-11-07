@@ -134,14 +134,14 @@ class UserController extends Controller
         //
         $user = $request->user();
         if ($id == $user->id) {
-            $check = $this->checkInfor($id);
+            $check = $this->checkInfor($user->info);
             if (!$check) {
 
-                if ($request->phone) UserInfor::where("id", $id)->update(["phone" => $request->phone]);;
-                if ($request->address) UserInfor::where("id", $id)->update(["address" => $request->address]);;
-                if ($request->gender) UserInfor::where("id", $id)->update(["phogenderne" => $request->gender]);;
-                if ($request->birday) UserInfor::where("id", $id)->update(["birday" => $request->birday]);;
-                $infor = UserInfor::where("user_id", $id)->first();
+                if ($request->phone) UserInfor::where("id", $user->info)->update(["phone" => $request->phone]);;
+                if ($request->address) UserInfor::where("id", $user->info)->update(["address" => $request->address]);;
+                if ($request->gender) UserInfor::where("id", $user->info)->update(["phogenderne" => $request->gender]);;
+                if ($request->birday) UserInfor::where("id", $user->info)->update(["birday" => $request->birday]);;
+                $infor = UserInfor::where("user_id", $user->info)->first();
                 return response()->json(["user_info" => $infor], 200);
             }
             $result = UserInfor::create([
