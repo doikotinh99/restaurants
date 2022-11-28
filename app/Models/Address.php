@@ -18,6 +18,7 @@ class Address extends Model
     public function isCity(){
         return $this->hasOne(Address_city::class, "id", "city");
     }
+    
     public function isDistrict(){
         return $this->hasOne(Address_district::class, "id", "district");
     }

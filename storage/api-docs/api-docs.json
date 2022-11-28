@@ -1156,12 +1156,7 @@
                     "201": {
                         "description": "Successful operation"
                     }
-                },
-                "security": [
-                    {
-                        "bearer": []
-                    }
-                ]
+                }
             },
             "post": {
                 "tags": [
