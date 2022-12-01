@@ -21,8 +21,8 @@ class RestaurantController extends Controller
      *     @OA\Response(
      *         response=201,
      *         description="Successful operation",
-     *     ),
-     *      security={{"bearer":{}}},
+     *     )
+     
      *)
      */
     public function index()
